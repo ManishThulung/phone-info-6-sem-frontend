@@ -19,7 +19,9 @@ export type Phone = {
   battery: string;
   memory: string;
   photo?: string;
+  releaseDate?: Date;
   price?: number;
+  ratings?: number;
   author?: Author;
   review?: Review;
 };

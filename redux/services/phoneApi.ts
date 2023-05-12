@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Phone } from "../types/phone";
 
-export const phoneApi = createApi({
+export const phoneApi: any = createApi({
   reducerPath: "phoneApi",
   refetchOnFocus: true,
   baseQuery: fetchBaseQuery({
@@ -11,10 +11,17 @@ export const phoneApi = createApi({
     getPhones: builder.query<Phone[], null>({
       query: () => "phones",
     }),
+    getCategoryPhones: builder.query<Phone[], string>({
+      query: (category) => `phones/${category}`,
+    }),
     getPhoneById: builder.query<Phone, number>({
       query: (id) => `phones/${id}`,
     }),
   }),
 });
 
-export const { useGetPhonesQuery, useGetPhoneByIdQuery } = phoneApi;
+export const {
+  useGetPhonesQuery,
+  useGetCategoryPhonesQuery,
+  useGetPhoneByIdQuery,
+} = phoneApi;

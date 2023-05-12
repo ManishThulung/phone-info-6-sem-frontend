@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 interface PageProps {
-  imgUrl: string;
+  imgUrl: string | undefined;
   name: string;
 }
 
