@@ -1,5 +1,4 @@
 import Accordion from "@/components/client/Accordion";
-import React from "react";
 
 function Phones() {
   return (

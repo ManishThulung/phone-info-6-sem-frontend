@@ -1,34 +1,10 @@
 import Image from "next/image";
 import banner from "../../public/image/phone1.png";
 import cardPhone from "../../public/image/cardPhone.jpg";
-// import {
-//   useGetPhoneByIdQuery,
-//   useGetPhonesQuery,
-// } from "@/redux/services/phoneApi";
-// import Loading from "@/app/loading";
-// import { useGetUsersQuery } from "@/redux/services/userApi";
+import CategoryCard from "@/components/phone-card/CategoryCard";
+import Link from "next/link";
 
 const Hero = () => {
-  // const { isLoading, data, error } = useGetPhonesQuery(null);
-  // const {
-  //   isLoading: isLoading1,
-  //   data: data1,
-  //   error: error1,
-  // } = useGetUsersQuery(null);
-
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
-  // if (isLoading1) {
-  //   return <div>user loading.....</div>;
-  // }
-  // if (error) {
-  //   console.log(error, "error");
-  //   return <div>loading</div>;
-  // }
-  // console.log(data, "data");
-  // console.log(data1, "user data");
-
   return (
     <>
       <section
@@ -56,136 +32,49 @@ const Hero = () => {
           </div>
           {/* mobile cards */}
           <div className="flex flex-col xl:flex-row item-center gap-5">
-            <div className="xl:last:w-[20%] rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-              <div className="w-full h-[35vh]">
-                <Image
-                  className="rounded-t-xl w-full h-full"
-                  src={cardPhone}
-                  alt="mobile"
-                />
-              </div>
-              <div className="bg-[#252728] px-2 pb-10 pt-1 ">
-                <h4 className="font-sans font-bold text-white">
-                  Upcomming smartphones
-                </h4>
-                <button className="text-gray-500">Read more</button>
-              </div>
-            </div>
-            <div className=" xl:w-[20%] rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-              <div className="w-full h-[35vh]">
-                <Image
-                  className="rounded-t-xl w-full h-full"
-                  src={cardPhone}
-                  alt="mobile"
-                />
-              </div>
-              <div className="bg-[#252728] px-2 pb-10 pt-1 ">
-                <h4 className="font-sans font-bold text-white">
-                  Upcomming smartphones
-                </h4>
-                <button className="text-gray-500">Read more</button>
-              </div>
-            </div>
-            <div className=" xl:w-[20%] rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-              <div className="w-full h-[35vh]">
-                <Image
-                  className="rounded-t-xl w-full h-full"
-                  src={cardPhone}
-                  alt="mobile"
-                />
-              </div>
-              <div className="bg-[#252728] px-2 pb-10 pt-1 ">
-                <h4 className="font-sans font-bold text-white">
-                  Upcomming smartphones
-                </h4>
-                <button className="text-gray-500">Read more</button>
-              </div>
-            </div>
-            <div className="  rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-              <div className="w-[100%] h-[35vh]">
-                <Image
-                  className="rounded-t-xl w-full h-full"
-                  src={cardPhone}
-                  alt="mobile"
-                />
-              </div>
-              <div className="bg-[#252728] px-2 pb-10 pt-1 ">
-                <h4 className="font-sans font-bold text-white">
-                  Upcomming smartphones
-                </h4>
-                <button className="text-gray-500">Read more</button>
-              </div>
-            </div>
+            {/* <Link href={`/phones/${upcomming}`}> */}
+            <CategoryCard
+              path="upcomming"
+              imgUrl=""
+              name="Upcomming Smartphones"
+            />
+            {/* </Link> */}
+            <CategoryCard path="latest" imgUrl="" name="Latest Smartphones" />
+            <CategoryCard path="gaming" imgUrl="" name="Gaming Smartphones" />
+            <CategoryCard
+              path="trending"
+              imgUrl=""
+              name="Trending Smartphones"
+            />
           </div>
           {/* mobile cards */}
-          <div className="flex flex-col xl:flex-row item-center xl:my-20 my-5 gap-5">
-            <div className=" xl:w-[25%] rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-              <div className="w-full h-[35vh]">
-                <Image
-                  className="rounded-t-xl w-full h-full"
-                  src={cardPhone}
-                  alt="mobile"
-                />
-              </div>
-              <div className="bg-[#252728] px-2 pb-10 pt-1 ">
-                <h4 className="font-sans font-bold text-white">
-                  Upcomming smartphones
-                </h4>
-                <button className="text-gray-500">Read more</button>
-              </div>
-            </div>
-            <div className=" xl:w-[25%] rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-              <div className="w-full h-[35vh]">
-                <Image
-                  className="rounded-t-xl w-full h-full"
-                  src={cardPhone}
-                  alt="mobile"
-                />
-              </div>
-              <div className="bg-[#252728] px-2 pb-10 pt-1 ">
-                <h4 className="font-sans font-bold text-white">
-                  Upcomming smartphones
-                </h4>
-                <button className="text-gray-500">Read more</button>
-              </div>
-            </div>
-            <div className=" xl:w-[25%]  rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-              <div className="w-full h-[35vh]">
-                <Image
-                  className="rounded-t-xl w-full h-full"
-                  src={cardPhone}
-                  alt="mobile"
-                />
-              </div>
-              <div className="bg-[#252728] px-2 pb-10 pt-1 ">
-                <h4 className="font-sans font-bold text-white">
-                  Upcomming smartphones
-                </h4>
-                <button className="text-gray-500">Read more</button>
-              </div>
-            </div>
-            <div className="xl:w-[25%]  rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-              <div className="w-full h-[35vh]">
-                <Image
-                  className="rounded-t-xl w-full h-full"
-                  src={cardPhone}
-                  alt="mobile"
-                />
-              </div>
-              <div className="bg-[#252728] px-2 pb-10 pt-1 ">
-                <h4 className="font-sans font-bold text-white">
-                  Upcomming smartphones
-                </h4>
-                <button className="text-gray-500">Read more</button>
-              </div>
-            </div>
-          </div>
+          {/* <div className="flex flex-col xl:flex-row item-center xl:my-20 my-5 gap-5">
+            <CategoryCard
+              path="upcomming"
+              imgUrl=""
+              name="Upcomming Smartphones"
+            />
+            <CategoryCard
+              path="upcomming"
+              imgUrl=""
+              name="Latest Smartphones"
+            />
+            <CategoryCard
+              path="upcomming"
+              imgUrl=""
+              name="Gaming Smartphones"
+            />
+            <CategoryCard
+              path="upcomming"
+              imgUrl=""
+              name="Tranding Smartphones"
+            />
+          </div> */}
         </div>
         <div className="bg-gradient-to-tl mt-3 xl:mt-10 from-slate-200 to-zinc-200">
           <div className="container flex items-center justify-between">
             <div>
               <h5 className="font-sans text-xl xl:text-4xl font-bold">
-                {" "}
                 Learn about 5G and every other networks
               </h5>
               <button className="text-red-400 hover:underline">
@@ -203,7 +92,6 @@ const Hero = () => {
           <div className="container flex items-center justify-between">
             <div>
               <h5 className="font-sans text-xl xl:text-4xl font-bold">
-                {" "}
                 Recommend phones see what people like
               </h5>
               <button className="text-red-400 hover:underline">

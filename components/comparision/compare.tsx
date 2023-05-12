@@ -15,7 +15,32 @@ import Storage from "@/public/assets/storage";
 import Image from "next/image";
 import React from "react";
 
+import {
+  useGetPhoneByIdQuery,
+  useGetPhonesQuery,
+} from "@/redux/services/phoneApi";
+import { useGetUsersQuery } from "@/redux/services/userApi";
+
 function Compare() {
+  // const { isLoading, data, error } = useGetPhonesQuery(null);
+  // const {
+  //   isLoading: isLoading1,
+  //   data: data1,
+  //   error: error1,
+  // } = useGetUsersQuery(null);
+
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
+  // if (isLoading1) {
+  //   return <div>user loading.....</div>;
+  // }
+  // if (error) {
+  //   console.log(error, "error");
+  //   return <div>loading</div>;
+  // }
+  // console.log(data, "data");
+  // console.log(data1, "user data");
   return (
     <div className="xl:container px-4 xl:px-36 xl:mx-auto mt-20">
       <div className="flex justify-between">

@@ -1,10 +1,7 @@
 import Footer from "@/pages/footer";
 import "./globals.css";
-import { Poppins } from "next/font/google";
 import Header from "@/pages/header";
-
-// const inter = Poppins({ subsets: ["devanagari"] });
-// const inter = Poppins({ subsets: ["latin"] });
+import { Providers } from "@/redux/provider";
 
 export const metadata = {
   title: "web portal for mobile phones",
@@ -19,9 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
