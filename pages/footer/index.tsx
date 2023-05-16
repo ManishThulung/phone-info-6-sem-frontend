@@ -12,7 +12,10 @@ const Footer = () => {
       <div className="bg-[#0f2027] xl:mt-20">
         <div className="container pt-4 pb-8">
           <div className="flex justify-center">
-            <Logo />
+            {/* <Logo /> */}
+            <div className="text-4xl text-white flex justify-center flex-col py-4 items-center">
+              <span>A Web Portal for</span> <span> Mobile Phones </span>
+            </div>
           </div>
           <hr className="dark:bg-gray-700 mx-auto mb-8 h-[2px]  w-full rounded border-0 bg-[#dddfe0]" />
           <div className="flex w-full xl:flex-row gap-8 xl:gap-0 flex-col xl:justify-between">

@@ -117,70 +117,75 @@ function PhoneDetails({ params: { phoneId } }: PageProps) {
                 {memory}
               </div>
               <div className="xl:border-gray-300 xl:order-none  order-4 flex justify-center text-[10px] xl:text-[12px] font-bold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
-                {/* <span>18 Mp Camera/</span> */}
                 {camera}
               </div>
               <div className="xl:border-gray-300 xl:order-none  order-6 flex justify-center text-[10px] xl:text-[12px] font-bold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
-                {/* <span>lion 4543 mAh/</span> */}
-                {releaseDate && releaseDate.toString().split("T")[0]}
+                {releaseDate ? (
+                  releaseDate.toString().split("T")[0]
+                ) : (
+                  <span>2020-4-1</span>
+                )}
               </div>
               <div className="xl:border-gray-300 xl:order-none  order-8 flex justify-center text-[10px] xl:text-[12px] font-bold  xl:px-10 px-10 xl:py-2 py-1">
-                {/* <span>lion 4543 mAh/</span> */}
                 {price}
               </div>
             </div>
           </div>
 
-          {/* <div className="grid grid-cols-6 xl:my-20 my-10">
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
+          <div className="grid grid-cols-6 xl:my-20 my-10">
+            <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
+              Storage & RAM
+            </div>
+            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
+              {memory}
+            </div>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
+            <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
+              Battery
+            </div>
+            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
+              {battery}
+            </div>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
+            <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
+              Camera
+            </div>
+            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
+              {camera}
+            </div>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
+            <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
+              Launched Date
+            </div>
+            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
+              {releaseDate ? (
+                releaseDate.toString().split("T")[0]
+              ) : (
+                <span>2020-4-1</span>
+              )}
+            </div>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
+            <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
+              price
+            </div>
+            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
+              {price}
+            </div>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
+            {/* <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
+              01
+            </div>
+            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
+              01
+            </div>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          01
-        </div>
-      </div>  */}
+            <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
+              01
+            </div>
+            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
+              01
+            </div> */}
+          </div>
         </div>
       ) : (
         <Loader />

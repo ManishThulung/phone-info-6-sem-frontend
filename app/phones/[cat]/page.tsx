@@ -22,27 +22,12 @@ function PhoneCategory({ params: { cat } }: PageProps) {
     <>
       <div className="container flex justify-center mx-auto  mt-20">
         <div className="grid xl:grid-cols-5 grid-cols-2 gap-16 border-l-[1px] border-gray-300 pl-5 xl:pl-20">
-          {/* {!isLoading ? ( */}
           {data &&
             data.map((phone: Phone) => (
               <Link key={phone.id} href={`/phones/${cat}/${phone.id}`}>
                 <PhoneCard name={phone.name} imgUrl={phone?.photo} />
               </Link>
             ))}
-          {/* <>
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-            <PhoneCard name="iPhone 13 Pro Max" imgUrl="" />
-          </> */}
-          {/* ) : (
-            <div>loading...</div>
-          )} */}
         </div>
       </div>
       <Pagination />

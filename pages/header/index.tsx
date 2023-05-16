@@ -52,7 +52,10 @@ const Header = () => {
         >
           <div className="">
             <Link href="/" className={` block w-full ${sticky ? "" : ""} `}>
-              <HeaderLogo />
+              {/* <HeaderLogo /> */}
+              <div className="text-2xl text-black flex justify-center flex-col py-4 items-center">
+                <span>A Web Portal for</span> <span> Mobile Phones </span>
+              </div>
             </Link>
           </div>
           <div className="flex  items-center justify-between">
@@ -89,7 +92,7 @@ const Header = () => {
               >
                 <ul className="block lg:flex lg:space-x-12">
                   {menuData.map((menuItem, index) => (
-                    <li key={menuItem.id} className="group font-sans relative">
+                    <li key={menuItem.id} className="group relative">
                       {menuItem.path ? (
                         <Link
                           href={menuItem.path}
