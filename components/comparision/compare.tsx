@@ -1,3 +1,4 @@
+"use client";
 import phone from "../../public/image/phone1.png";
 import Battery from "@/public/assets/Battery";
 import Camera from "@/public/assets/Camera";
@@ -13,150 +14,196 @@ import Security from "@/public/assets/Security";
 import Sensor from "@/public/assets/Sensor";
 import Storage from "@/public/assets/storage";
 import Image from "next/image";
-import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-import {
-  useGetPhoneByIdQuery,
-  useGetPhonesQuery,
-} from "@/redux/services/phoneApi";
-import { useGetUsersQuery } from "@/redux/services/userApi";
+import { useGetComparePhoneQuery } from "@/redux/services/phoneApi";
+import { useState } from "react";
+import Loader from "../Loader";
+import Company from "@/public/assets/Company";
 
 function Compare() {
-  // const { isLoading, data, error } = useGetPhonesQuery(null);
-  // const {
-  //   isLoading: isLoading1,
-  //   data: data1,
-  //   error: error1,
-  // } = useGetUsersQuery(null);
+  const [phoneOne, setPhoneOne] = useState<string>();
+  const [phoneTwo, setPhoneTwo] = useState<string>();
+  const [phoneData, setPhoneData] = useState();
+  const handleSumbit = async (e: any) => {
+    e.preventDefault();
+    console.log(phoneOne, "kjdshf");
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
-  // if (isLoading1) {
-  //   return <div>user loading.....</div>;
-  // }
-  // if (error) {
-  //   console.log(error, "error");
-  //   return <div>loading</div>;
-  // }
-  // console.log(data, "data");
-  // console.log(data1, "user data");
+    const res = await fetch(
+      `http://localhost:4000/api/phones/compare?phoneOne=${phoneOne}&phoneTwo=${phoneTwo}`
+    );
+    const data = await res.json();
+    setPhoneData(data);
+    setPhoneOne("");
+    setPhoneTwo("");
+  };
+  console.log(phoneData, "phoneData");
+
+  // const [getComparePhone, { data, isLoading }] = useGetComparePhoneQuery();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   // watch,
+  //   formState: { errors },
+  // } = useForm({
+  //   defaultValues: {
+  //     phoneOne: "",
+  //     phoneTwo: "",
+  //   },
+  // });
+
+  // const onSubmit = (data: any) => getComparePhone(data);
+
   return (
     <div className="xl:container px-4 xl:px-36 xl:mx-auto mt-20">
       <div className="flex justify-between">
-        <button
-          type="button"
-          className="py-1 px-5 xl:px-20 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+        <form className="flex justify-between w-full">
+          <input
+            className="rounded-xl border-2 border-[#7E7E7E] w-[351px] h-[33px] pl-4 outline-none"
+            placeholder="Search Phone 1"
+            name="phoneOne"
+            value={phoneOne}
+            onChange={(e) => setPhoneOne(e.target.value)}
+          />
+          <input
+            className="rounded-xl border-2 border-[#7E7E7E] w-[351px] h-[33px] pl-4 outline-none"
+            placeholder="Search Phone 2"
+            name="phoneTwo"
+            value={phoneTwo}
+            onChange={(e) => setPhoneTwo(e.target.value)}
+          />
+          <button onClick={handleSumbit}>Submit</button>
+        </form>
+        {/* <form
+          className="w-full flex justify-between"
+          onSubmit={handleSubmit(onSubmit)}
         >
-          Search pohne 1
-        </button>
-        <button
-          type="button"
-          className="py-1 px-5 xl:px-20 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-        >
-          Search phone 2
-        </button>
+          <input
+            className="rounded-xl border-2 border-[#7E7E7E] w-[351px] h-[33px] pl-4 outline-none"
+            {...register("phoneOne", { required: true, minLength: 3 })}
+            placeholder="Search Phone 1"
+          />
+          {errors.phoneOne && <p>This field is required</p>}
+
+          <input
+            className="rounded-xl border-2 border-[#7E7E7E] w-[351px] h-[33px] pl-4 outline-none"
+            {...register("phoneTwo", { required: true, minLength: 3 })}
+            placeholder="Search Phone 2"
+          />
+          {errors.phoneTwo && <p>This field is required</p>}
+          <input type="submit" />
+        </form> */}
       </div>
-      <div>
-        <div className="border-t border-gray-200 my-4">
-          <div className="flex mt-9 justify-between px-9">
-            <div>
-              <div className="xl:w-[200px] xl:h-[32vh] w-[90px] h-[14vh]">
-                <Image
-                  className="h-full w-full"
-                  src={phone}
-                  alt="phone"
-                  width={300}
-                  height={300}
-                  unoptimized
-                />
-                <h4 className="xl:text-[14px] text-[9px] text-center mt-2">
-                  iphone 13 pro max
-                </h4>
+      {phoneData ? (
+        <div>
+          <div className="border-t border-gray-200 my-4">
+            <div className="flex mt-9 justify-between px-9">
+              <div>
+                <div className="xl:w-[200px] xl:h-[32vh] w-[90px] h-[14vh]">
+                  <Image
+                    className="h-full w-full"
+                    src={phoneData?.phone1.photo}
+                    alt="phone"
+                    width={300}
+                    height={300}
+                    unoptimized
+                  />
+                  <h4 className="xl:text-[14px] text-[9px] text-center mt-2">
+                    {phoneData?.phone1.name}
+                  </h4>
+                </div>
+                <div className="mt-12 flex justify-evenly">
+                  <div className="bg-[#3797ff] rounded-sm h-4 w-4"></div>
+                  <div className="bg-black h-4 w-4 rounded-sm"></div>
+                  <div className="bg-[#ca0000] h-4 w-4 rounded-sm"></div>
+                </div>
               </div>
-              <div className="mt-12 flex justify-evenly">
-                <div className="bg-[#3797ff] rounded-sm h-4 w-4"></div>
-                <div className="bg-black h-4 w-4 rounded-sm"></div>
-                <div className="bg-[#ca0000] h-4 w-4 rounded-sm"></div>
+              <div>
+                <div className="xl:w-[200px] w-[90px] xl:h-[32vh] h-[14vh]">
+                  <Image
+                    className="h-full w-full"
+                    src={phoneData?.phone2.photo}
+                    alt="phone"
+                    width={300}
+                    height={300}
+                    unoptimized
+                  />
+                  <h4 className="xl:text-[14px] text-[9px] text-center mt-2">
+                    {phoneData?.phone2.name}
+                  </h4>
+                </div>
+                <div className="mt-12 flex justify-evenly">
+                  <div className="bg-[#3797ff] rounded-sm h-4 w-4"></div>
+                  <div className="bg-black h-4 w-4 rounded-sm"></div>
+                  <div className="bg-[#ca0000] h-4 w-4 rounded-sm"></div>
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="xl:w-[200px] w-[90px] xl:h-[32vh] h-[14vh]">
-                <Image
-                  className="h-full w-full"
-                  src={phone}
-                  alt="phone"
-                  width={300}
-                  height={300}
-                  unoptimized
-                />
-                <h4 className="xl:text-[14px] text-[9px] text-center mt-2">
-                  iphone 13 pro max
-                </h4>
-              </div>
-              <div className="mt-12 flex justify-evenly">
-                <div className="bg-[#3797ff] rounded-sm h-4 w-4"></div>
-                <div className="bg-black h-4 w-4 rounded-sm"></div>
-                <div className="bg-[#ca0000] h-4 w-4 rounded-sm"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-center flex-col my-9">
-          <div className="border-t border-b flex justify-center">
-            <div className="border-r w-[200px] border-l px-9 py-2">
-              <div className="flex justify-center">
-                <Storage />
-              </div>
-              <span className="text-[9px] flex justify-center pt-2 font-bold">
-                Storage & RAM
-              </span>
             </div>
           </div>
-          <div className="border-b flex justify-center">
-            <div className="border-r border-l w-[200px] px-9 py-2">
-              <div className="flex justify-center">
-                <Display />
+          <div className="flex justify-center flex-col my-9">
+            <div className="border-t border-b flex justify-center">
+              <div className="m-auto">{phoneData?.phone1.memory}</div>
+              <div className="border-r w-[200px] border-l px-9 py-2">
+                <div className="flex justify-center">
+                  <Storage />
+                </div>
+                <span className="text-[9px] flex justify-center pt-2 font-bold">
+                  Storage & RAM
+                </span>
               </div>
-              <span className="text-[9px] flex justify-center pt-2 font-bold">
-                Display
-              </span>
+              <div className="m-auto">{phoneData?.phone2.memory}</div>
             </div>
-          </div>
 
-          <div className="border-b flex justify-center">
-            <div className="border-r border-l w-[200px] px-9 py-2">
-              <div className="flex justify-center">
-                <Processor />
+            <div className="border-b flex justify-center">
+              <div className="m-auto">{phoneData?.phone1.company}</div>
+              <div className="border-r border-l w-[200px] px-9 py-2">
+                <div className="flex justify-center">
+                  <Camera />
+                </div>
+                <span className="text-[9px] flex justify-center pt-2 font-bold">
+                  Camera
+                </span>
               </div>
-              <span className="text-[9px] flex justify-center pt-2 font-bold">
-                Processor
-              </span>
+              <div className="m-auto">{phoneData?.phone2.company}</div>
             </div>
-          </div>
 
-          <div className="border-b flex justify-center">
-            <div className="border-r border-l w-[200px] px-9 py-2">
-              <div className="flex justify-center">
-                <Camera />
+            {/* <div className="border-b flex justify-center">
+              <div className="border-r border-l w-[200px] px-9 py-2">
+                <div className="flex justify-center">
+                  <Processor />
+                </div>
+                <span className="text-[9px] flex justify-center pt-2 font-bold">
+                  Processor
+                </span>
               </div>
-              <span className="text-[9px] flex justify-center pt-2 font-bold">
-                Camera
-              </span>
-            </div>
-          </div>
-          <div className="border-b flex justify-center">
-            <div className="border-r border-l w-[200px] px-9 py-2">
-              <div className="flex justify-center">
-                <Battery />
-              </div>
-              <span className="text-[9px] flex justify-center pt-2 font-bold">
-                Battery
-              </span>
-            </div>
-          </div>
+            </div> */}
 
-          {/* <div className="border-b flex justify-center">
+            <div className="border-b flex justify-center">
+              <div className="m-auto">{phoneData?.phone1.camera}</div>
+              <div className="border-r border-l w-[200px] px-9 py-2">
+                <div className="flex justify-center">
+                  <Camera />
+                </div>
+                <span className="text-[9px] flex justify-center pt-2 font-bold">
+                  Camera
+                </span>
+              </div>
+              <div className="m-auto">{phoneData?.phone2.camera}</div>
+            </div>
+            <div className="border-b flex justify-center">
+              <div className="m-auto">{phoneData?.phone1.battery}</div>
+              <div className="border-r border-l w-[200px] px-9 py-2">
+                <div className="flex justify-center">
+                  <Battery />
+                </div>
+                <span className="text-[9px] flex justify-center pt-2 font-bold">
+                  Battery
+                </span>
+              </div>
+              <div className="m-auto">{phoneData?.phone2.battery}</div>
+            </div>
+
+            {/* <div className="border-b flex justify-center">
           <div className="border-r border-l w-[200px] px-9 py-2">
             <div className="flex justify-center">
               <Security />
@@ -219,28 +266,35 @@ function Compare() {
             </span>
           </div>
         </div> */}
-          <div className="border-b flex justify-center">
-            <div className="border-r border-l w-[200px] px-9 py-2">
-              <div className="flex justify-center">
-                <ReleaseDate />
+            <div className="border-b flex justify-center">
+              <div className="m-auto">{phoneData?.phone1.releaseDate}</div>
+              <div className="border-r border-l w-[200px] px-9 py-2">
+                <div className="flex justify-center">
+                  <ReleaseDate />
+                </div>
+                <span className="text-[9px] flex justify-center pt-2 font-bold">
+                  LunchDate
+                </span>
               </div>
-              <span className="text-[9px] flex justify-center pt-2 font-bold">
-                LunchDate
-              </span>
+              <div className="m-auto">{phoneData?.phone2.releaseDate}</div>
             </div>
-          </div>
-          <div className="border-b flex justify-center">
-            <div className="border-r border-l w-[200px] px-9 py-2">
-              <div className="flex justify-center">
-                <Price />
+            <div className="border-b flex justify-center">
+              <div className="m-auto">{phoneData?.phone1.price}</div>
+              <div className="border-r border-l w-[200px] px-9 py-2">
+                <div className="flex justify-center">
+                  <Price />
+                </div>
+                <span className="text-[9px] flex justify-center pt-2 font-bold">
+                  Price
+                </span>
               </div>
-              <span className="text-[9px] flex justify-center pt-2 font-bold">
-                Price
-              </span>
+              <div className="m-auto">{phoneData?.phone2.price}</div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 }

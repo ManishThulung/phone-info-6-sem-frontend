@@ -18,15 +18,14 @@ const Hero = () => {
             </div>
             <div className="flex justify-center xl:block ">
               <div>
-                <h2 className="font-sans text-5xl font-bold">
-                  top smart phones
-                </h2>
-                <h2 className="font-sans text-3xl xl:text-5xl font-bold">
-                  2022
-                </h2>
-                <button className="text-red-400 font-sans hover:underline">
+                <h2 className="text-6xl font-bold">Top Smartphones</h2>
+                <h2 className="text-3xl xl:text-6xl font-bold">2023</h2>
+                <Link
+                  className="text-red-400 hover:underline"
+                  href="/phones/trending"
+                >
                   Read more
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -74,7 +73,7 @@ const Hero = () => {
         <div className="bg-gradient-to-tl mt-3 xl:mt-10 from-slate-200 to-zinc-200">
           <div className="container flex items-center justify-between">
             <div>
-              <h5 className="font-sans text-xl xl:text-4xl font-bold">
+              <h5 className="text-xl xl:text-4xl font-bold">
                 Learn about 5G and every other networks
               </h5>
               <button className="text-red-400 hover:underline">
@@ -91,7 +90,7 @@ const Hero = () => {
         <div className="bg-gradient-to-tl my-3 xl:my-10 bg-[#9ADCE6]">
           <div className="container flex items-center justify-between">
             <div>
-              <h5 className="font-sans text-xl xl:text-4xl font-bold">
+              <h5 className="text-xl xl:text-4xl font-bold">
                 Recommend phones see what people like
               </h5>
               <button className="text-red-400 hover:underline">
