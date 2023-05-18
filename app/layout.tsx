@@ -2,6 +2,8 @@ import Footer from "@/pages/footer";
 import "./globals.css";
 import Header from "@/pages/header";
 import { Providers } from "@/redux/provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "web portal for mobile phones",
