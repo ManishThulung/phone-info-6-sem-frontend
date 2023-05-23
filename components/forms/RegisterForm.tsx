@@ -1,7 +1,13 @@
+"use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRegisterUserMutation } from "@/redux/services/userApi";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const validationSchema = z.object({
   name: z.string().min(3, { message: "Name is required" }),
@@ -10,13 +16,13 @@ const validationSchema = z.object({
   }),
   password: z
     .string()
-    .min(3, { message: "Password must be atleast 6 characters" }),
+    .min(4, { message: "Password must be atleast 4 characters" }),
 });
 
 type ValidationSchema = z.infer<typeof validationSchema>;
 
 function RegisterForm() {
-  const [registerUser, { data, isLoading }] = useRegisterUserMutation();
+  const [registerUser, { data, isLoading, error }] = useRegisterUserMutation();
 
   const {
     register,
@@ -29,8 +35,24 @@ function RegisterForm() {
   const onSubmit: SubmitHandler<ValidationSchema> = (data) =>
     registerUser(data);
 
+  useEffect(() => {
+    if (data) {
+      toast.success(data?.message);
+    }
+    if (error) {
+      toast.error(data?.message);
+    }
+  }, [data, error]);
+
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
       <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4 md:flex md:justify-between">
           <div className="mb-4 md:mr-2 md:mb-0">

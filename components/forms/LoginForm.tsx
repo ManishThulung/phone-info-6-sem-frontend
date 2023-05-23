@@ -2,6 +2,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useLoginUserMutation } from "@/redux/services/userApi";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 const validationSchema = z.object({
   email: z.string().min(5, { message: "Email is required" }).email({
@@ -9,13 +12,16 @@ const validationSchema = z.object({
   }),
   password: z
     .string()
-    .min(3, { message: "Password must be atleast 6 characters" }),
+    .min(4, { message: "Password must be atleast 4 characters" }),
 });
 
 type ValidationSchema = z.infer<typeof validationSchema>;
 
 function LoginForm() {
-  const [loginUser, { data, isLoading }] = useLoginUserMutation();
+  const router = useRouter();
+
+  const [loginUser, { data: registerData, isLoading, error }] =
+    useLoginUserMutation();
   const {
     register,
     handleSubmit,
@@ -25,10 +31,38 @@ function LoginForm() {
   });
 
   const onSubmit: SubmitHandler<ValidationSchema> = (data) => loginUser(data);
-  // const onSubmit = (data) => sendRequest(data);
+
+  if (registerData) {
+    localStorage.setItem("access_token", registerData?.access_token);
+    router.push("/");
+  }
+
+  console.log(registerData, "registerData");
+  console.log(error, "error");
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    if (accessToken) {
+      router.push("/");
+    }
+    // if (registerData) {
+    //   toast.success(registerData?.message);
+    // }
+    if (error) {
+      // toast.error(error.status);
+      console.log(error);
+    }
+  }, [registerData, router, error]);
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
       <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-sm" htmlFor="email">

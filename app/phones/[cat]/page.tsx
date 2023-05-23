@@ -16,7 +16,7 @@ interface PageProps {
 }
 
 function PhoneCategory({ params: { cat } }: PageProps) {
-  const { isLoading, data, error } = useGetCategoryPhonesQuery(cat);
+  const { isLoading, data } = useGetCategoryPhonesQuery(cat);
 
   return (
     <>

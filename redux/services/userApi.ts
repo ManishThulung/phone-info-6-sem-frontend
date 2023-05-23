@@ -1,10 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-type User = {
-  id: number;
-  name: string;
-  email: number;
-};
+import { AccessToken, LoginData, User } from "../types/user";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -12,9 +7,11 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URI,
   }),
+  tagTypes: ["Users"],
   endpoints: (builder) => ({
     getUsers: builder.query<User[], null>({
       query: () => "users",
+      providesTags: ["Users"],
     }),
     getUserById: builder.query<User, number>({
       query: (id) => `users/${id}`,
@@ -28,12 +25,13 @@ export const userApi = createApi({
       }),
     }),
 
-    loginUser: builder.mutation({
-      query: ({ email, password }) => ({
+    loginUser: builder.mutation<AccessToken, Partial<LoginData>>({
+      query: (body) => ({
         url: `users/login`,
         method: "POST",
-        body: { email, password },
+        body,
       }),
+      invalidatesTags: ["Users"],
     }),
   }),
 });

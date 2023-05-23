@@ -2,6 +2,9 @@ import Footer from "@/pages/footer";
 import "./globals.css";
 import Header from "@/pages/header";
 import { Providers } from "@/redux/provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { poppins } from "@/utils/fonts";
 
 export const metadata = {
   title: "web portal for mobile phones",
@@ -15,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${poppins.variable}`}>
         <Providers>
           <Header />
           {children}
