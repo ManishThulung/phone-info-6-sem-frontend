@@ -49,7 +49,8 @@ function LoginForm() {
     //   toast.success(registerData?.message);
     // }
     if (error) {
-      toast.error(error.registerData?.message);
+      // toast.error(error.status);
+      console.log(error);
     }
   }, [registerData, router, error]);
 

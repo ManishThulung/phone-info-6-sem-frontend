@@ -18,10 +18,28 @@ export type Phone = {
   camera: string;
   battery: string;
   memory: string;
-  photo?: string;
-  releaseDate?: Date;
+  photo: string;
+  releaseDate?: string;
   price?: number;
   ratings?: number;
   author?: Author;
   review?: Review;
 };
+
+export type ComparePhone = {
+  phone1: Phone;
+  phone2: Phone;
+};
+
+export type CompareData = {
+  phoneOne: string;
+  phoneTwo: string;
+};
+
+export type Company = {
+  id: number;
+  company: string;
+  phone: Phone[];
+};
+
+export type Companies = Company[];
