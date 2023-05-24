@@ -21,6 +21,7 @@ function PhoneCategory({ params: { cat } }: PageProps) {
   return (
     <>
       <div className="container flex justify-center mx-auto  mt-20">
+        <div className="text-3xl font-semibold m-auto">{cat} Phones</div>
         <div className="grid xl:grid-cols-5 grid-cols-2 gap-16 border-l-[1px] border-gray-300 pl-5 xl:pl-20">
           {data &&
             data.map((phone: Phone) => (
