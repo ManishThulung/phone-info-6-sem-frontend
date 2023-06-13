@@ -31,6 +31,9 @@ export const phoneApi: any = createApi({
     getCategoryPhones: builder.query<Phone[], string>({
       query: (category) => `/phones/category/${category}`,
     }),
+    getSimilarPhones: builder.query<Phone[], string>({
+      query: (name) => `/phones/similar/${name}`,
+    }),
 
     getPhoneById: builder.query<Phone, number>({
       query: (id) => `phones/${id}`,
@@ -51,6 +54,7 @@ export const {
   useGetPhonesQuery,
   useGetCompanyQuery,
   useGetCategoryPhonesQuery,
+  useGetSimilarPhonesQuery,
   useGetPhoneByIdQuery,
   // useGetComparePhoneQuery,
   useComparePhoneMutation,
