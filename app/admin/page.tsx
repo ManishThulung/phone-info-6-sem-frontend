@@ -1,11 +1,11 @@
-"use client";
-import { NextPage } from "next";
-import IsAuth from "@/components/auth/IsAuth";
-import React from "react";
+// "use client";
+// import { NextPage } from "next";
+// import IsAuth from "@/components/auth/IsAuth";
+// import React from "react";
 
-const AdminPage: NextPage = () => {
+const AdminPage = () => {
   return <div>AdminPage</div>;
 };
 
-// export default AdminPage;
-export default IsAuth(AdminPage);
+// // export default AdminPage;
+// export default IsAuth(AdminPage);

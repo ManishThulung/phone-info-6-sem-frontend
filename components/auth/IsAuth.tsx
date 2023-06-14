@@ -1,44 +1,44 @@
-"use client";
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+// "use client";
+// import React, { useEffect } from "react";
+// import { useRouter } from "next/navigation";
 
-function IsAuth<T>(Component: React.ComponentType<T>) {
-  const WrappedComponent = (props: T) => {
-    const router = useRouter();
+// function IsAuth<T>(Component: React.ComponentType<T>) {
+//   const WrappedComponent = (props: T) => {
+//     const router = useRouter();
 
-    // if (loading) {
-    //   return <div>Loading...</div>;
-    // }
+//     // if (loading) {
+//     //   return <div>Loading...</div>;
+//     // }
 
-    // if (error || !data) {
-    //   router.push("/login");
-    //   return null;
-    // }
+//     // if (error || !data) {
+//     //   router.push("/login");
+//     //   return null;
+//     // }
 
-    // const role = localStorage.getItem("access_token");
-    let role;
-    useEffect(() => {
-      role = true;
-    });
+//     // const role = localStorage.getItem("access_token");
+//     let role;
+//     useEffect(() => {
+//       role = true;
+//     });
 
-    if (!role) {
-      router.push("/");
-      return null;
-    }
+//     if (!role) {
+//       router.push("/");
+//       return null;
+//     }
 
-    return (
-      <>
-        <Component {...props!} />
-      </>
-    );
-  };
+//     return (
+//       <>
+//         <Component {...props!} />
+//       </>
+//     );
+//   };
 
-  // Set the display name of the wrapped component
-  // WrappedComponent.displayName = `IsAuth(${
-  //   Component.displayName || Component.name || "Component"
-  // })`;
+//   // Set the display name of the wrapped component
+//   // WrappedComponent.displayName = `IsAuth(${
+//   //   Component.displayName || Component.name || "Component"
+//   // })`;
 
-  return WrappedComponent;
-}
+//   return WrappedComponent;
+// }
 
-export default IsAuth;
+// export default IsAuth;
