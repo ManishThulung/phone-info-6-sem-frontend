@@ -20,7 +20,7 @@ type ValidationSchema = z.infer<typeof validationSchema>;
 function LoginForm() {
   const router = useRouter();
 
-  const [loginUser, { data: registerData, isLoading, error }] =
+  const [loginUser, { data: loginData, isLoading, error, isSuccess }] =
     useLoginUserMutation();
   const {
     register,
@@ -32,27 +32,37 @@ function LoginForm() {
 
   const onSubmit: SubmitHandler<ValidationSchema> = (data) => loginUser(data);
 
-  if (registerData) {
-    localStorage.setItem("access_token", registerData?.access_token);
+  if (isSuccess) {
+    localStorage.setItem("access_token", JSON.stringify(loginData));
+  }
+
+  if (loginData?.role === "admin") {
+    router.push("/admin");
+  }
+  if (loginData?.role == "content-creator") {
+    router.push("/admin");
+  }
+  if (loginData?.role === "user") {
     router.push("/");
   }
 
-  console.log(registerData, "registerData");
+  console.log(loginData, "loginData");
+  console.log(loginData?.role, "loginData role");
   console.log(error, "error");
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
-    if (accessToken) {
-      router.push("/");
-    }
-    // if (registerData) {
-    //   toast.success(registerData?.message);
-    // }
-    if (error) {
-      // toast.error(error.status);
-      console.log(error);
-    }
-  }, [registerData, router, error]);
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("access_token");
+  //   if (accessToken) {
+  //     router.push("/");
+  //   }
+  //   // if (loginData) {
+  //   //   toast.success(loginData?.message);
+  //   // }
+  //   if (error) {
+  //     // toast.error(error.status);
+  //     console.log(error);
+  //   }
+  // }, [loginData, router, error]);
 
   return (
     <>

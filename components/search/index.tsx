@@ -27,8 +27,9 @@ function Search() {
     camera: "",
   });
   const [price, setPrice] = useState<number[]>([]);
+  const { name, company, ram, battery, camera } = filter;
   return (
-    <div className="container px-4 mx-auto mt-20">
+    <div className="container px-4 mx-auto mt-[96px] lg:mt-[121px]">
       <div className="flex xl:flex-row flex-col">
         <div className="xl:px-5 xl:w-[30%]">
           <div className="flex items-center gap-2">
@@ -56,6 +57,7 @@ function Search() {
                     <input
                       placeholder="Name"
                       className="block text-sm text-gray-400 rounded-lg appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-1 pr-8 leading-tight focus:outline-none"
+                      value={name}
                     />
                   </div>
                 </div>
