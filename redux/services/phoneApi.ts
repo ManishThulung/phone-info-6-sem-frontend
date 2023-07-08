@@ -7,10 +7,9 @@ import {
   Phone,
 } from "../types/phone";
 
-// interface ComparePhone {
-//   phoneOne: string;
-//   phoneTwo: string;
-// }
+const accessToken = JSON.parse(
+  localStorage.getItem("access_token") || ""
+)?.access_token;
 
 export const phoneApi: any = createApi({
   reducerPath: "phoneApi",
@@ -47,6 +46,19 @@ export const phoneApi: any = createApi({
       }),
       invalidatesTags: ["Phones"],
     }),
+
+    deletePhone: builder.mutation({
+      query: (id) => ({
+        url: `phones/${id}`,
+        method: "DELETE",
+        credentialsls: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + `${accessToken}`,
+        },
+      }),
+      invalidatesTags: ["Phones"],
+    }),
   }),
 });
 
@@ -58,4 +70,5 @@ export const {
   useGetPhoneByIdQuery,
   // useGetComparePhoneQuery,
   useComparePhoneMutation,
+  useDeletePhoneMutation,
 } = phoneApi;
