@@ -11,4 +11,6 @@ export type LoginData = {
 
 export type AccessToken = {
   access_token: string;
+  role: string;
+  id: number;
 };
