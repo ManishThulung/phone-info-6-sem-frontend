@@ -19,6 +19,7 @@ import EditIcon from "@/public/assets/EditIcon";
 import DeleteIcon from "@/public/assets/DeleteIcon";
 import DeleteModal from "@/components/utils/DeleteModal";
 import { useDeletePhoneMutation } from "@/redux/services/phoneApi";
+import { AntTableWrapper } from "../Styles";
 
 type DataIndex = keyof PhoneData;
 
@@ -126,9 +127,9 @@ export const PhoneTable = () => {
   });
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [id, setId] = useState<number>();
-  const { data: dataw } = useDeletePhoneMutation(id);
-  console.log(dataw, "data");
+  const [id, setId] = useState<number>(0);
+  const [deletePhone, { data: deleteData, error, isSuccess }] =
+    useDeletePhoneMutation();
 
   const showModal = (id: number) => {
     setId(id);
@@ -136,6 +137,8 @@ export const PhoneTable = () => {
   };
 
   const handleOk = () => {
+    deletePhone(id);
+    setId(0);
     setIsModalOpen(false);
   };
 
@@ -155,11 +158,11 @@ export const PhoneTable = () => {
       ...getColumnSearchProps("name"),
       render: (record) => record.name,
     },
-    {
-      title: "Company",
-      key: "company",
-      render: (record) => record.company,
-    },
+    // {
+    //   title: "Company",
+    //   key: "company",
+    //   render: (record) => record.company,
+    // },
     {
       title: "Price",
       key: "price",
@@ -188,17 +191,7 @@ export const PhoneTable = () => {
 
   return (
     <>
-      <Table
-        // onRow={(record) => {
-        //   return {
-        //     onClick: () => {
-        //       navigate(record?.id, { state: { itemId: record?.id } });
-        //     },
-        //   };
-        // }}
-        dataSource={data}
-        columns={columns}
-      />
+      <AntTableWrapper dataSource={data} columns={columns} />
       {isModalOpen && (
         <DeleteModal
           isModalOpen={isModalOpen}

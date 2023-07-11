@@ -26,10 +26,11 @@ function DeleteModal({
     <Modal
       title="Delete?"
       open={isModalOpen}
-      onOk={() => {
-        deletePhone(id);
-        setIsModalOpen(false);
-      }}
+      // onOk={() => {
+      //   deletePhone(id);
+      //   setIsModalOpen(false);
+      // }}
+      onOk={onOk}
       onCancel={onCancel}
     >
       <p>Are you sure you want to delete this?</p>
