@@ -30,7 +30,7 @@ function CompareResult({ phone1, phone2 }: ComparePhone) {
                 height={300}
                 unoptimized
               />
-              <h4 className="xl:text-[14px] text-[9px] text-center mt-2">
+              <h4 className="xl:text-2xl text-xl font-bold text-center my-2">
                 {phone1.name}
               </h4>
             </div>
@@ -50,7 +50,7 @@ function CompareResult({ phone1, phone2 }: ComparePhone) {
                 height={300}
                 unoptimized
               />
-              <h4 className="xl:text-[14px] text-[9px] text-center mt-2">
+              <h4 className="xl:text-2xl text-xl font-bold text-center my-2">
                 {phone2.name}
               </h4>
             </div>
@@ -64,165 +64,165 @@ function CompareResult({ phone1, phone2 }: ComparePhone) {
       </div>
       <div className="flex justify-center flex-col my-9">
         <div className="border-t border-b flex justify-center">
-          <div className="m-auto">{phone1.memory}</div>
-          <div className="border-r w-[200px] border-l px-9 py-2">
+          <div className="m-auto text-lg font-medium">{phone1.memory}</div>
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Storage />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Storage & RAM
             </span>
           </div>
-          <div className="m-auto">{phone2.memory}</div>
+          <div className="m-auto text-lg font-medium">{phone2.memory}</div>
         </div>
 
         <div className="border-b flex justify-center">
-          <div className="m-auto">{phone1.company}</div>
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="m-auto text-lg font-medium">{phone1.company}</div>
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Display />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Display
             </span>
           </div>
-          <div className="m-auto">{phone2.company}</div>
+          <div className="m-auto text-lg font-medium">{phone2.company}</div>
         </div>
         <div className="border-b flex justify-center">
-          <div className="m-auto">{phone1.company}</div>
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="m-auto text-lg font-medium">{phone1.company}</div>
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Camera />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Camera
             </span>
           </div>
-          <div className="m-auto">{phone2.company}</div>
+          <div className="m-auto text-lg font-medium">{phone2.company}</div>
         </div>
 
         <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Processor />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Processor
             </span>
           </div>
         </div>
 
         <div className="border-b flex justify-center">
-          <div className="m-auto">{phone1.camera}</div>
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="m-auto text-lg font-medium">{phone1.camera}</div>
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Camera />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Camera
             </span>
           </div>
-          <div className="m-auto">{phone2.camera}</div>
+          <div className="m-auto text-lg font-medium">{phone2.camera}</div>
         </div>
         <div className="border-b flex justify-center">
-          <div className="m-auto">{phone1.battery}</div>
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="m-auto text-lg font-medium">{phone1.battery}</div>
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Battery />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Battery
             </span>
           </div>
-          <div className="m-auto">{phone2.battery}</div>
+          <div className="m-auto text-lg font-medium">{phone2.battery}</div>
         </div>
 
         <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Security />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Security & Authentication
             </span>
           </div>
         </div>
 
         <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Nfc />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               NFC
             </span>
           </div>
         </div>
 
         <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Network />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Networks
             </span>
           </div>
         </div>
 
         <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Sensor />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Sensors
             </span>
           </div>
         </div>
         <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <OS />
             </div>
-            <span className="text-[8px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Operating System
             </span>
           </div>
         </div>
         <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Package />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Package Contains
             </span>
           </div>
         </div>
         <div className="border-b flex justify-center">
-          <div className="m-auto">{phone1.releaseDate}</div>
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="m-auto text-lg font-medium">{phone1.releaseDate}</div>
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <ReleaseDate />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               LunchDate
             </span>
           </div>
-          <div className="m-auto">{phone2.releaseDate}</div>
+          <div className="m-auto text-lg font-medium">{phone2.releaseDate}</div>
         </div>
         <div className="border-b flex justify-center">
-          <div className="m-auto">{phone1.price}</div>
-          <div className="border-r border-l w-[200px] px-9 py-2">
+          <div className="m-auto text-lg font-medium">{phone1.price}</div>
+          <div className="border-r border-l w-[280px] px-9 py-4">
             <div className="flex justify-center">
               <Price />
             </div>
-            <span className="text-[9px] flex justify-center pt-2 font-bold">
+            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
               Price
             </span>
           </div>
-          <div className="m-auto">{phone2.price}</div>
+          <div className="m-auto text-lg font-medium">{phone2.price}</div>
         </div>
       </div>
     </>
