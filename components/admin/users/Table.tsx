@@ -1,29 +1,25 @@
 "use client";
 
-// import { InputRef } from "antd";
-// import { ColumnType } from "antd/es/list";
-// import { FilterConfirmProps } from "antd/es/table/interface";
-// import { useRef, useState } from "react";
 import { Button, Tooltip } from "antd";
 import { Table } from "antd";
 import { TableData } from "./TableData";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef } from "antd";
 import { Input, Space } from "antd";
 import type { ColumnsType, ColumnType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-import Link from "next/link";
-import { PhoneData } from "@/components/types/admin/types";
+import { UserData } from "@/components/types/admin/types";
 import EditIcon from "@/public/assets/EditIcon";
 import DeleteIcon from "@/public/assets/DeleteIcon";
-import DeleteModal from "@/components/utils/DeleteModal";
-import { useDeletePhoneMutation } from "@/redux/services/phoneApi";
 import { AntTableWrapper } from "../Styles";
+import UserModal from "./UserModal";
+import { useDeleteUserMutation } from "@/redux/services/adminApi";
+import { ToastContainer, toast } from "react-toastify";
 
-type DataIndex = keyof PhoneData;
+type DataIndex = keyof UserData;
 
-export const PhoneTable = () => {
+export const UserTable = () => {
   const { data } = TableData();
 
   const [searchText, setSearchText] = useState("");
@@ -47,7 +43,7 @@ export const PhoneTable = () => {
 
   const getColumnSearchProps = (
     dataIndex: DataIndex
-  ): ColumnType<PhoneData> => ({
+  ): ColumnType<UserData> => ({
     filterDropdown: ({
       setSelectedKeys,
       selectedKeys,
@@ -129,22 +125,30 @@ export const PhoneTable = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [key, setKey] = useState<string>("");
   const [id, setId] = useState<number>(0);
-  const [deletePhone, { data: deleteData, error, isSuccess }] =
-    useDeletePhoneMutation();
+  const [role, setRole] = useState<string>("");
+  const [deleteUser] = useDeleteUserMutation();
 
   const showModal = (id: number) => {
     setKey("delete");
     setId(id);
     setIsModalOpen(true);
   };
-  const showReviewModal = (id: number) => {
+
+  const showEditModal = (id: number, role: string) => {
     setId(id);
-    setKey("review");
+    setRole(role);
+    setKey("edit");
     setIsModalOpen(true);
   };
 
   const handleOk = () => {
-    deletePhone(id);
+    if (key == "delete") {
+      deleteUser(id);
+      toast.success("User Deleted Successfully");
+    }
+    if (key == "edit") {
+      toast.success("User Role Updated Successfully");
+    }
     setId(0);
     setIsModalOpen(false);
   };
@@ -153,7 +157,7 @@ export const PhoneTable = () => {
     setIsModalOpen(false);
   };
 
-  const columns: ColumnsType<PhoneData> = [
+  const columns: ColumnsType<UserData> = [
     {
       title: "Id",
       key: "id",
@@ -165,15 +169,16 @@ export const PhoneTable = () => {
       ...getColumnSearchProps("name"),
       render: (record) => record.name,
     },
-    // {
-    //   title: "Company",
-    //   key: "company",
-    //   render: (record) => record.company,
-    // },
+
     {
-      title: "Price",
-      key: "price",
-      render: (record) => record.price,
+      title: "Email",
+      key: "email",
+      render: (record) => record.email,
+    },
+    {
+      title: "Role",
+      key: "role",
+      render: (record) => record.role,
     },
     {
       title: "Action",
@@ -181,22 +186,19 @@ export const PhoneTable = () => {
       render: (_, record) => {
         return (
           <div className="flex gap-6">
-            <Link href={"sd"} className="cursor-pointer">
-              <EditIcon />
-            </Link>
+            <div
+              className="cursor-pointer"
+              onClick={() => showEditModal(record?.id, record?.role)}
+            >
+              <Tooltip placement="right" title="Review Phone">
+                <EditIcon />
+              </Tooltip>
+            </div>
             <div
               className="cursor-pointer"
               onClick={() => showModal(record?.id)}
             >
               <DeleteIcon />
-            </div>
-            <div
-              className="cursor-pointer"
-              onClick={() => showReviewModal(record?.id)}
-            >
-              <Tooltip placement="right" title="Review Phone">
-                <EditIcon />
-              </Tooltip>
             </div>
           </div>
         );
@@ -208,17 +210,19 @@ export const PhoneTable = () => {
     <>
       <AntTableWrapper dataSource={data} columns={columns} />
       {isModalOpen && (
-        <DeleteModal
+        <UserModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
           id={id}
-          name={key}
+          role={role}
+          action={key}
         />
       )}
+      <ToastContainer />
     </>
   );
 };
 
-export default PhoneTable;
+export default UserTable;

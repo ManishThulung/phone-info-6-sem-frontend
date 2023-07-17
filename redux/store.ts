@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { userApi } from "./services/userApi";
 import { phoneApi } from "./services/phoneApi";
+import { reviewApi } from "./services/ReviewAi";
+import { adminApi } from "./services/adminApi";
 
 export const store = configureStore({
   reducer: {
@@ -10,7 +12,12 @@ export const store = configureStore({
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(phoneApi.middleware, userApi.middleware),
+    getDefaultMiddleware().concat(
+      phoneApi.middleware,
+      userApi.middleware,
+      reviewApi.middleware,
+      adminApi.middleware
+    ),
 });
 
 setupListeners(store.dispatch);

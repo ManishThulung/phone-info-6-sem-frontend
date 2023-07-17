@@ -13,6 +13,8 @@ type Query = {
   page: number;
   name: string;
   memory: string;
+  battery: string;
+  camera: string;
   maxPrice: number;
   minPrice: number;
 };
@@ -43,7 +45,7 @@ export const phoneApi: any = createApi({
     getPhoneById: builder.query<Phone, number>({
       query: (id) => `phones/${id}`,
     }),
-    getPhoneSearch: builder.query<Phone, any>({
+    getPhoneSearch: builder.query<Phone, Query>({
       query: ({
         limit = "",
         page = "",

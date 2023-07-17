@@ -2,29 +2,26 @@
 import { useDeletePhoneMutation } from "@/redux/services/phoneApi";
 import { Modal } from "antd";
 import React, { useState } from "react";
+import TextEditor from "../admin/review/TextEditor";
 
 interface PageProps {
   isModalOpen: boolean;
   setIsModalOpen: any;
   id?: number;
+  name?: string;
   onOk: () => void;
   onCancel: () => void;
 }
 
-function DeleteModal({
-  isModalOpen,
-  onOk,
-  onCancel,
-  id,
-  setIsModalOpen,
-}: PageProps) {
+function DeleteModal({ isModalOpen, onOk, onCancel, id, name }: PageProps) {
   const [deletePhone, { data, error, isSuccess }] = useDeletePhoneMutation();
 
   console.log(data, "data");
   console.log(id, "id");
+  console.log(name, "name");
   return (
     <Modal
-      title="Delete?"
+      title={name == "delete" ? "Delete?" : "Review"}
       open={isModalOpen}
       // onOk={() => {
       //   deletePhone(id);
@@ -32,8 +29,13 @@ function DeleteModal({
       // }}
       onOk={onOk}
       onCancel={onCancel}
+      className="w-[800px]"
     >
-      <p>Are you sure you want to delete this?</p>
+      {name == "delete" ? (
+        <p>Are you sure you want to delete this?</p>
+      ) : (
+        <TextEditor />
+      )}
     </Modal>
   );
 }

@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { Table } from "antd";
+import { Select, Table } from "antd";
 
 export const AdminSection = styled.div`
   margin: 100px 60px 0 60px;
@@ -20,5 +20,11 @@ export const AntTableWrapper = styled<any>(Table)`
     .ant-table-cell {
       background: none;
     }
+  }
+`;
+
+export const AntSelect = styled<any>(Select)`
+  &.ant-select {
+    width: 445px !important;
   }
 `;
