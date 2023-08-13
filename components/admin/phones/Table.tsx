@@ -20,6 +20,7 @@ import DeleteIcon from "@/public/assets/DeleteIcon";
 import DeleteModal from "@/components/utils/DeleteModal";
 import { useDeletePhoneMutation } from "@/redux/services/phoneApi";
 import { AntTableWrapper } from "../Styles";
+import { ToastContainer, toast } from "react-toastify";
 
 type DataIndex = keyof PhoneData;
 
@@ -144,7 +145,10 @@ export const PhoneTable = () => {
   };
 
   const handleOk = () => {
-    deletePhone(id);
+    if (key == "delete") {
+      deletePhone(id);
+      toast.success("Phone Deleted Successfully");
+    }
     setId(0);
     setIsModalOpen(false);
   };
@@ -217,6 +221,7 @@ export const PhoneTable = () => {
           name={key}
         />
       )}
+      <ToastContainer />
     </>
   );
 };

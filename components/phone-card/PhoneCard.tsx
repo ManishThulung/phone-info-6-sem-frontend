@@ -3,9 +3,9 @@ import Link from "next/link";
 import React from "react";
 
 interface PageProps {
-  imgUrl: string | undefined;
-  name: string;
-  id: number;
+  imgUrl?: string | undefined;
+  name?: string;
+  id?: number;
 }
 
 function PhoneCard({ imgUrl, name, id }: PageProps) {

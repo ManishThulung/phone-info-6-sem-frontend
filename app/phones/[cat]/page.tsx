@@ -26,7 +26,11 @@ function PhoneCategory({ params: { cat } }: PageProps) {
           {data &&
             data.map((phone: Phone) => (
               <Link key={phone.id} href={`/phones/${cat}/${phone.id}`}>
-                <PhoneCard name={phone.name} imgUrl={phone?.photo} />
+                <PhoneCard
+                  name={phone.name}
+                  imgUrl={phone?.photo}
+                  id={phone.id}
+                />
               </Link>
             ))}
         </div>

@@ -5,7 +5,7 @@ import React from "react";
 import Sidebar from "@/components/admin/Sidebar";
 import { AdminSection } from "@/components/admin/Styles";
 
-const AdminPage: NextPage = () => {
+const AdminPage = () => {
   return (
     <AdminSection>
       <Sidebar />
