@@ -6,7 +6,6 @@ import PhoneTable from "@/components/admin/phones/Table";
 import { Button } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
-// background: linear-gradient(135deg, #F8F7F3 0%, #E7F6FC 100%);
 function Page() {
   const [isForm, setIsForm] = useState<boolean>(false);
   const onClick = () => {

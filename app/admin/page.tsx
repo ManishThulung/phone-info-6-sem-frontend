@@ -16,3 +16,4 @@ const AdminPage = () => {
 
 // export default AdminPage;
 export default IsAuth(AdminPage);
+// export default AdminPage;
