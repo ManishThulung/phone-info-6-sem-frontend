@@ -4,9 +4,12 @@ import Camera from "@/public/assets/Camera";
 import Price from "@/public/assets/Price";
 import Storage from "@/public/assets/storage";
 import phonePic from "../../public/image/phone1.png";
+import { useGetRatingQuery } from "@/redux/services/ratingApi";
+import { SpecificationWrapper } from "./Styles";
 
 interface PageProps {
   data: {
+    id: number;
     name?: string;
     company?: string;
     camera?: string;
@@ -19,8 +22,21 @@ interface PageProps {
 }
 
 function Specification({ data }: PageProps) {
-  const { name, company, camera, battery, memory, photo, releaseDate, price } =
-    data;
+  const {
+    id,
+    name,
+    company,
+    camera,
+    battery,
+    memory,
+    photo,
+    releaseDate,
+    price,
+  } = data;
+
+  const { isLoading, data: ratingData, error } = useGetRatingQuery(id);
+  console.log(ratingData, "ratingDatad");
+
   return (
     <div>
       <div className="flex flex-col items-center gap-14 justify-center py-10">
@@ -43,117 +59,123 @@ function Specification({ data }: PageProps) {
           </div>
         </div>
 
-        <div className="grid xl:grid-cols-4 grid-cols-1  ">
-          <div className="xl:border-b-[3px] order-1 xl:order-none  xl:border-gray-300 xl:xl:border-r-[3px] xl:px-20 px-10 pt-2">
+        <div className="grid xl:grid-cols-5 grid-cols-1">
+          <div className="xl:border-b-[3px] order-1 xl:order-none  xl:border-gray-300 xl:xl:border-r-[3px] px-8 pt-2">
             <div className="flex justify-center">
               <Storage />
             </div>
-            <div className="text-xs text-center">
-              <span>Storage & RAM</span>
+            <div className="text-center py-2 text-lg font-semibold">
+              Storage & RAM
             </div>
           </div>
-          <div className="xl:border-b-[3px] order-3 xl:order-none  xl:border-gray-300 xl:xl:border-r-[3px] xl:px-20 px-10 xl:py-2 py-1">
+          <div className="xl:border-b-[3px] order-3 xl:order-none  xl:border-gray-300 xl:xl:border-r-[3px] px-8 pt-2">
             <div className="flex justify-center">
               <Camera />
             </div>
-            <div className="text-xs text-center">
+            <div className="text-center py-2 text-lg font-semibold">
               <span>Camera</span>
             </div>
           </div>
-          <div className="xl:border-b-[3px] xl:order-none  order-5 xl:border-gray-300 xl:xl:border-r-[3px] xl:px-20 px-10 py-1">
+          <div className="xl:border-b-[3px] xl:order-none  order-5 xl:border-gray-300 xl:xl:border-r-[3px] px-8 pt-2">
             <div className="flex justify-center">
               <Battery />
             </div>
-            <div className="text-xs text-center">
+            <div className="text-center py-2 text-lg font-semibold">
               <span>Release Date</span>
             </div>
           </div>
-          <div className="xl:border-b-[3px] xl:order-none  order-7 xl:border-gray-300 xl:px-20 px-10 py-1">
+          <div className="xl:border-b-[3px] xl:order-none  order-7 xl:border-gray-300 xl:xl:border-r-[3px] px-8 pt-2">
             <div className="flex justify-center">
               <Price />
             </div>
-            <div className="text-xs text-center">
+            <div className="text-center py-2 text-lg font-semibold">
               <span>Price</span>
             </div>
           </div>
+          <div className="xl:border-b-[3px] xl:order-none  order-9 xl:border-gray-300 px-8 pt-2">
+            <div className="flex justify-center">
+              <Price />
+            </div>
+            <div className="text-center py-2 text-lg font-semibold">
+              <span>Rating</span>
+            </div>
+          </div>
 
-          <div className="xl:border-gray-300 order-2 xl:order-none  text-[10px] xl:text-[12px] font-bold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
+          <div className="xl:border-gray-300 flex justify-center order-2 xl:order-none  text-base font-semibold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
             {/* <span>128 GB 6 GB RAM/</span>
               <span>18 GB 6 GB RAM/</span>
               <span>18 GB 6 GB RAM/</span>
               <span>18 GB 6 GB RAM/</span> */}
             {memory}
           </div>
-          <div className="xl:border-gray-300 xl:order-none  order-4 flex justify-center text-[10px] xl:text-[12px] font-bold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
+          <div className="xl:border-gray-300 xl:order-none  order-4 flex justify-center text-base font-semibold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
             {camera}
           </div>
-          <div className="xl:border-gray-300 xl:order-none  order-6 flex justify-center text-[10px] xl:text-[12px] font-bold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
+          <div className="xl:border-gray-300 xl:order-none  order-6 flex justify-center text-base font-semibold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
             {releaseDate ? (
               releaseDate.toString().split("T")[0]
             ) : (
               <span>2020-4-1</span>
             )}
           </div>
-          <div className="xl:border-gray-300 xl:order-none  order-8 flex justify-center text-[10px] xl:text-[12px] font-bold  xl:px-10 px-10 xl:py-2 py-1">
+          <div className="xl:border-gray-300 xl:order-none  order-6 flex justify-center text-base font-semibold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
             {price}
+          </div>
+          <div className="xl:border-gray-300 xl:order-none  order-8 flex justify-center text-base font-semibold  xl:px-10 px-10 xl:py-2 py-1">
+            {ratingData?.rating}
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-6 xl:my-20 my-10">
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          Storage & RAM
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          {memory}
-        </div>
+      <SpecificationWrapper className="grid grid-cols-6 xl:my-20 my-10">
+        <div>Storage & RAM</div>
+        <p>{memory}</p>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          Battery
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          {battery}
-        </div>
+        <div>Processor</div>
+        <p>{memory}</p>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          Camera
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          {camera}
-        </div>
+        <div>Display</div>
+        <p>{memory}</p>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          Launched Date
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
+        <div>Battery</div>
+        <p>{battery}</p>
+
+        <div>Security & Authentication</div>
+        <p>{camera}</p>
+
+        <div>Camera</div>
+        <p>{camera}</p>
+
+        <div>NFT</div>
+        <p>{camera}</p>
+
+        <div>Network</div>
+        <p>{camera}</p>
+
+        <div>Sensors</div>
+        <p>{camera}</p>
+
+        <div>Operating System</div>
+        <p>{camera}</p>
+
+        <div>Package Contains</div>
+        <p>{camera}</p>
+
+        <div>Launched Date</div>
+        <p>
           {releaseDate ? (
             releaseDate.toString().split("T")[0]
           ) : (
             <span>2020-4-1</span>
           )}
-        </div>
+        </p>
 
-        <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-          price
-        </div>
-        <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-          {price}
-        </div>
+        <div>Price</div>
+        <p>{price}</p>
 
-        {/* <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-              01
-            </div>
-            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-              01
-            </div>
-
-            <div className="xl:border-t-2 xl:border-r-2 xl:border-gray-200 px-14 py-6">
-              01
-            </div>
-            <div className="xl:border-t-2 col-span-5 xl:border-gray-200 px-14 py-6">
-              01
-            </div> */}
-      </div>
+        <div>Price</div>
+        <p>{price}</p>
+      </SpecificationWrapper>
     </div>
   );
 }

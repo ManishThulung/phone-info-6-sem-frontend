@@ -7,3 +7,10 @@ export interface PhoneData {
   company: string;
   price: string;
 }
+export interface UserData {
+  key: React.Key;
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+}

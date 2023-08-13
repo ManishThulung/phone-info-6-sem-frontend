@@ -30,10 +30,14 @@ function LoginForm() {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<ValidationSchema> = (data) => loginUser(data);
+  const onSubmit: SubmitHandler<ValidationSchema> = (data) => {
+    console.log(data, "data");
+    loginUser(data);
+  };
 
-  if (isSuccess) {
+  if (loginData) {
     localStorage.setItem("access_token", JSON.stringify(loginData));
+    toast.success(loginData?.message);
   }
 
   if (loginData?.role === "admin") {
@@ -66,13 +70,7 @@ function LoginForm() {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        closeOnClick
-        pauseOnHover
-        theme="colored"
-      />
+      <ToastContainer />
       <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-sm" htmlFor="email">

@@ -6,10 +6,18 @@ import {
   ComparePhone,
   Phone,
 } from "../types/phone";
+import { headers } from "../storage";
 
-const accessToken = JSON.parse(
-  localStorage.getItem("access_token") || ""
-)?.access_token;
+type Query = {
+  limit: number;
+  page: number;
+  name: string;
+  memory: string;
+  battery: string;
+  camera: string;
+  maxPrice: number;
+  minPrice: number;
+};
 
 export const phoneApi: any = createApi({
   reducerPath: "phoneApi",
@@ -37,6 +45,25 @@ export const phoneApi: any = createApi({
     getPhoneById: builder.query<Phone, number>({
       query: (id) => `phones/${id}`,
     }),
+    getPhoneSearch: builder.query<Phone, Query>({
+      query: ({
+        limit = "",
+        page = "",
+        name = "",
+        memory = "",
+        battery = "",
+        camera = "",
+        maxPrice = "",
+        minPrice = "",
+      }) =>
+        // {limit: number,
+        // page: number,
+        // name: string,
+        // memory: string,
+        // maxPrice: number,
+        // minPrice: number}
+        `phones/search?name=${name}&memory=${memory}&battery=${battery}&camera=${camera}&maxPrice=${maxPrice}&minPrice=${minPrice}&limit=${limit}&page=${page}`,
+    }),
 
     comparePhone: builder.mutation<ComparePhone, Partial<CompareData>>({
       query: (body) => ({
@@ -52,10 +79,7 @@ export const phoneApi: any = createApi({
         url: `phones/${id}`,
         method: "DELETE",
         credentialsls: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + `${accessToken}`,
-        },
+        headers: headers,
       }),
       invalidatesTags: ["Phones"],
     }),
@@ -68,6 +92,7 @@ export const {
   useGetCategoryPhonesQuery,
   useGetSimilarPhonesQuery,
   useGetPhoneByIdQuery,
+  useGetPhoneSearchQuery,
   // useGetComparePhoneQuery,
   useComparePhoneMutation,
   useDeletePhoneMutation,

@@ -5,7 +5,7 @@ import React from "react";
 import Sidebar from "@/components/admin/Sidebar";
 import { AdminSection } from "@/components/admin/Styles";
 
-const AdminPage: NextPage = () => {
+const AdminPage = () => {
   return (
     <AdminSection>
       <Sidebar />
@@ -16,3 +16,4 @@ const AdminPage: NextPage = () => {
 
 // export default AdminPage;
 export default IsAuth(AdminPage);
+// export default AdminPage;

@@ -8,6 +8,7 @@ export const Management = () => {
       viewBox="0 0 23 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      color="#FFF"
     >
       <g clip-path="url(#clip0_186_1004)">
         <path

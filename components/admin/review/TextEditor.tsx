@@ -27,10 +27,10 @@ const modules = {
   },
 };
 
-function ReviewEditor() {
+function TextEditor() {
   const [value, setValue] = useState("");
   return (
-    <div className="mt-[128px]">
+    <>
       <ReactQuill
         modules={modules}
         value={value}
@@ -44,8 +44,8 @@ function ReviewEditor() {
       >
         save
       </button>
-    </div>
+    </>
   );
 }
 
-export default ReviewEditor;
+export default TextEditor;

@@ -36,7 +36,7 @@ function PhoneDetails({ params: { phoneId } }: PageProps) {
   return (
     <>
       {data ? (
-        <div className="xl:container px-5 xl:px-36 xl:mx-auto mt-20">
+        <div className="xl:container px-5 xl:px-36 xl:mx-auto my-[128px]">
           <div className="flex justify-between flex-col xl:flex-row gap-4 xl:gap-0">
             <div className="flex gap-2 font-bold  text-[10px] xl:text-[12px]">
               <div className="bg-gray-200 text-black px-2 rounded-md flex py-1">
