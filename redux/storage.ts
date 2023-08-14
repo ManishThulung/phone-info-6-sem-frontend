@@ -1,6 +1,9 @@
 let user;
 if (typeof window !== "undefined") {
-  user = JSON.parse(localStorage.getItem("access_token") || "");
+  let isUser = localStorage.getItem("access_token");
+  if (isUser) {
+    user = JSON?.parse(isUser);
+  }
 }
 
 export const headers = {
