@@ -1,11 +1,13 @@
+"use client";
 import Image from "next/image";
 import Battery from "@/public/assets/Battery";
 import Camera from "@/public/assets/Camera";
 import Price from "@/public/assets/Price";
 import Storage from "@/public/assets/storage";
 import phonePic from "../../public/image/phone1.png";
-import { useGetRatingQuery } from "@/redux/services/ratingApi";
 import { SpecificationWrapper } from "./Styles";
+import { Rate } from "antd";
+import { useState } from "react";
 
 interface PageProps {
   data: {
@@ -18,6 +20,7 @@ interface PageProps {
     photo?: string;
     releaseDate?: string;
     price?: number;
+    ratings?: any;
   };
 }
 
@@ -32,10 +35,22 @@ function Specification({ data }: PageProps) {
     photo,
     releaseDate,
     price,
+    ratings,
   } = data;
 
-  const { isLoading, data: ratingData, error } = useGetRatingQuery(id);
-  console.log(ratingData, "ratingDatad");
+  const totalRatings = ratings.length;
+  const sumOfRatings = ratings.reduce(
+    (accumulator: number, rating: any) => accumulator + rating.value,
+    0
+  );
+
+  const rating = sumOfRatings / totalRatings;
+  const [value, setValue] = useState(rating);
+
+  let user: any;
+  if (typeof window !== "undefined") {
+    user = localStorage.getItem("access_token");
+  }
 
   return (
     <div>
@@ -122,7 +137,7 @@ function Specification({ data }: PageProps) {
             {price}
           </div>
           <div className="xl:border-gray-300 xl:order-none  order-8 flex justify-center text-base font-semibold  xl:px-10 px-10 xl:py-2 py-1">
-            {ratingData?.rating}
+            <Rate allowHalf onChange={setValue} value={value} disabled />
           </div>
         </div>
       </div>
@@ -169,9 +184,6 @@ function Specification({ data }: PageProps) {
             <span>2020-4-1</span>
           )}
         </p>
-
-        <div>Price</div>
-        <p>{price}</p>
 
         <div>Price</div>
         <p>{price}</p>

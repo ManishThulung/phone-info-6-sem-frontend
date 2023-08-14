@@ -1,14 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {
-  Companies,
-  Company,
-  CompareData,
-  ComparePhone,
-  Phone,
-} from "../types/phone";
 import { headers } from "../storage";
-
-type Param = { id: number };
 
 export const ratingApi: any = createApi({
   reducerPath: "ratingApi",
@@ -19,19 +10,17 @@ export const ratingApi: any = createApi({
   tagTypes: ["Rating"],
 
   endpoints: (builder) => ({
-    getRating: builder.query<any, number>({
-      query: (id) => `rating/${id}`,
-    }),
-
     addRating: builder.mutation({
-      query: ({ id, value }) => ({
+      query: ({ id, ...body }) => ({
         url: `rating/create/${id}`,
         method: "POST",
-        value,
+        body,
+        credentialsls: "include",
+        headers: headers,
       }),
       invalidatesTags: ["Rating"],
     }),
   }),
 });
 
-export const { useGetRatingQuery, useAddRatingMutation } = ratingApi;
+export const { useAddRatingMutation } = ratingApi;

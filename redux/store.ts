@@ -5,11 +5,17 @@ import { phoneApi } from "./services/phoneApi";
 import { reviewApi } from "./services/ReviewAi";
 import { adminApi } from "./services/adminApi";
 import { ratingApi } from "./services/ratingApi";
+import { commentApi } from "./services/commentApi";
 
 export const store = configureStore({
   reducer: {
     [phoneApi.reducerPath]: phoneApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [reviewApi.reducerPath]: reviewApi.reducer,
+    [ratingApi.reducerPath]: ratingApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
+    [commentApi.reducerPath]: commentApi.reducer,
+    [adminApi.reducerPath]: adminApi.reducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
@@ -18,6 +24,7 @@ export const store = configureStore({
       userApi.middleware,
       reviewApi.middleware,
       adminApi.middleware,
+      commentApi.middleware,
       ratingApi.middleware
     ),
 });

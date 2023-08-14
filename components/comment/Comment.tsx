@@ -3,48 +3,75 @@ import React, { useState } from "react";
 import Button from "../Button";
 import { styled } from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
-import { Modal } from "antd";
+import { Modal, Rate } from "antd";
 import { useAddCommentMutation } from "@/redux/services/commentApi";
+import { useAddRatingMutation } from "@/redux/services/ratingApi";
 
 function Comment({ id, data }: { id: number; data: any }) {
   const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
   const [comment, setCommet] = useState("");
+  const [isRatingOpen, setIsRatingOpen] = useState(false);
+  const [value, setValue] = useState<number>(0);
 
   const [addComment, { data: commentData, error, isSuccess }] =
     useAddCommentMutation();
+  const [addRating, { data: ratingData }] = useAddRatingMutation();
 
   let user: any;
   if (typeof window !== "undefined") {
     user = localStorage.getItem("access_token");
   }
-  const handleClick = () => {
+  const handleClick = (key: any) => {
     if (!user) {
       return toast.warning("Please login first");
     } else {
-      setOpen(true);
+      if (key == "comment") {
+        setOpen(true);
+      } else {
+        setIsRatingOpen(true);
+      }
     }
   };
 
   const handleOk = () => {
-    addComment({ id, value: comment });
-    toast.success(commentData?.message);
-    setOpen(false);
+    if (open) {
+      addComment({ id, value: comment });
+      toast.success("Comment submitted successfully");
+      setOpen(false);
+    }
+    if (isRatingOpen) {
+      addRating({ id, value: value });
+      toast.success("Rating submitted successfully");
+      setIsRatingOpen(false);
+    }
   };
 
   const handleCancel = () => {
-    setOpen(false);
+    if (open) {
+      setOpen(false);
+    } else {
+      setIsRatingOpen(false);
+    }
   };
   return (
     <div className="max-w-[1040px] mx-auto my-[128px]">
       <div className="flex flex-col justify-center">
-        <Button
-          type="primary"
-          className="text-2xl w-fit py-4 px-8 h-[60px] mx-auto rounded-lg"
-          onClick={handleClick}
-        >
-          Add Comments
-        </Button>
+        <div className="flex gap-8 justify-center">
+          <Button
+            type="primary"
+            className="text-2xl w-fit py-3 px-8 h-[56px] rounded-lg"
+            onClick={() => handleClick("comment")}
+          >
+            Add Comments
+          </Button>
+          <Button
+            type="primary"
+            className="text-2xl w-fit py-3 px-8 h-[56px] rounded-lg"
+            onClick={() => handleClick("rating")}
+          >
+            Submit Rating
+          </Button>
+        </div>
         <p className="text-3xl font-semibold my-[56px] text-gray-700">
           See what people say about this phone
         </p>
@@ -67,23 +94,26 @@ function Comment({ id, data }: { id: number; data: any }) {
           </div>
         )}
       </div>
-      {open && (
+      {(isRatingOpen || open) && (
         <ModalWrapper
-          title="Comment"
-          open={open}
+          title={open ? "Add Comment" : "Rate this Phone"}
+          open={open ? open : isRatingOpen}
           onOk={handleOk}
-          confirmLoading={confirmLoading}
           onCancel={handleCancel}
         >
-          <textarea
-            name="comment"
-            placeholder="Write comments"
-            rows={5}
-            value={comment}
-            onChange={(e) => {
-              setCommet(e.target.value);
-            }}
-          />
+          {open ? (
+            <textarea
+              name="comment"
+              placeholder="Write comments"
+              rows={5}
+              value={comment}
+              onChange={(e) => {
+                setCommet(e.target.value);
+              }}
+            />
+          ) : (
+            <Rate allowHalf onChange={setValue} value={value} />
+          )}
         </ModalWrapper>
       )}
       <ToastContainer />
@@ -99,6 +129,14 @@ const BoxShadow = styled.div`
 
 const ModalWrapper = styled(Modal)`
   .ant-modal-content {
+    .ant-modal-header {
+      .ant-modal-title {
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+      }
+    }
+
     .ant-modal-body {
       margin: 32px 0;
       textarea {
@@ -109,6 +147,16 @@ const ModalWrapper = styled(Modal)`
         border-width: 1px;
         border-color: rgb(191 219 254);
         font-size: 16px;
+      }
+      ul {
+        display: flex;
+        justify-content: center;
+        font-size: 40px;
+        margin: 16px 0;
+
+        li {
+          margin-inline-end: 14px;
+        }
       }
     }
 
@@ -122,14 +170,14 @@ const ModalWrapper = styled(Modal)`
         width: 170px;
         color: white;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 700;
         height: 45px;
       }
       button:last-child {
         background: blue;
         width: 170px;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 700;
         height: 45px;
       }
     }
