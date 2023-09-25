@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useLoginUserMutation } from "@/redux/services/userApi";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 const validationSchema = z.object({
@@ -31,28 +30,39 @@ function LoginForm() {
   });
 
   const onSubmit: SubmitHandler<ValidationSchema> = (data) => {
-    console.log(data, "data");
-    loginUser(data);
+    // loginUser(data).then(() => {
+    //   console.log(loginData, "loginData");
+    //   console.log(error.status, "error");
+    //   if (loginData.statusCode == 401) {
+    //     toast.error("loginData?.message");
+    //   }
+    //   if (error.status == 401) {
+    //     toast.error("loginData?.messageeeee");
+    //   }
+    //   toast.success("Login successful");
+    // });
+
+    try {
+      loginUser(data);
+      toast.success("Login successful");
+    } catch (error) {
+      toast.error("loginData?.messageeeee");
+    }
   };
 
   if (loginData) {
     localStorage.setItem("access_token", JSON.stringify(loginData));
-    toast.success(loginData?.message);
   }
 
   if (loginData?.role === "admin") {
-    router.push("/admin");
+    router.push("/admin/phones");
   }
   if (loginData?.role == "content-creator") {
-    router.push("/admin");
+    router.push("/admin/phones");
   }
   if (loginData?.role === "user") {
     router.push("/");
   }
-
-  console.log(loginData, "loginData");
-  console.log(loginData?.role, "loginData role");
-  console.log(error, "error");
 
   // useEffect(() => {
   //   const accessToken = localStorage.getItem("access_token");
@@ -70,7 +80,6 @@ function LoginForm() {
 
   return (
     <>
-      <ToastContainer />
       <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-sm" htmlFor="email">
@@ -114,13 +123,14 @@ function LoginForm() {
         </div>
         <div className="mb-6 text-center">
           <button
-            className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+            className="w-full text-lg px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Login
           </button>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 }

@@ -5,12 +5,19 @@ import React from "react";
 
 function Sidebar() {
   return (
-    <div className="w-[310px] bg-[#65a1cd]">
-      <div className="pt-8 pl-6">
+    <div className="w-[420px] bg-[#65a1cd]">
+      <div className="pt-8 pl-12">
         <div className="flex items-center mb-8">
           <Management />
           <span className="text-3xl pl-2 font-semibold ">Management</span>
         </div>
+        <Link
+          href="/admin/company"
+          className="flex items-center mb-4 text-xl font-medium py-2 "
+        >
+          <Dashbord />
+          <span className="text-xl pl-2 font-semibold">Company</span>
+        </Link>
         <Link
           href="/admin/phones"
           className="flex items-center mb-4 text-xl font-medium py-2 "

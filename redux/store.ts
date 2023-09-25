@@ -6,6 +6,7 @@ import { reviewApi } from "./services/ReviewAi";
 import { adminApi } from "./services/adminApi";
 import { ratingApi } from "./services/ratingApi";
 import { commentApi } from "./services/commentApi";
+import { companyApi } from "./services/companyApi";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [commentApi.reducerPath]: commentApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
+    [companyApi.reducerPath]: companyApi.reducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
@@ -25,7 +27,8 @@ export const store = configureStore({
       reviewApi.middleware,
       adminApi.middleware,
       commentApi.middleware,
-      ratingApi.middleware
+      ratingApi.middleware,
+      companyApi.middleware
     ),
 });
 

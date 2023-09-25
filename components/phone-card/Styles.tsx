@@ -9,6 +9,11 @@ export const SpecificationWrapper = styled.div`
     font-size: 18px;
     line-height: 28px;
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    column-gap: 12px;
+    align-items: center;
+    text-align: center;
   }
   > p {
     grid-column: span 5 / span 5;

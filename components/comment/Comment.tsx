@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Modal, Rate } from "antd";
 import { useAddCommentMutation } from "@/redux/services/commentApi";
 import { useAddRatingMutation } from "@/redux/services/ratingApi";
+import { FaUserCircle } from "react-icons/Fa";
 
 function Comment({ id, data }: { id: number; data: any }) {
   const [open, setOpen] = useState(false);
@@ -82,8 +83,9 @@ function Comment({ id, data }: { id: number; data: any }) {
           <div className="flex flex-col gap-[56px]">
             {data?.map((item: any, index: any) => (
               <BoxShadow className="w-full py-8 px-[40px]" key={index}>
-                <p className="text-center">svg</p>
-                <p className="text-2xl font-bold text-center text-gray-900 py-3">
+                <FaUserCircle className="m-auto scale-[2.8]" />
+
+                <p className="text-2xl font-bold text-center text-gray-900 py-4">
                   {item?.author?.name}
                 </p>
                 <p className="text-xl font-medium text-gray-700">
@@ -127,7 +129,7 @@ const BoxShadow = styled.div`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 
-const ModalWrapper = styled(Modal)`
+export const ModalWrapper = styled(Modal)`
   .ant-modal-content {
     .ant-modal-header {
       .ant-modal-title {

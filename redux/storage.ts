@@ -6,6 +6,8 @@ if (typeof window !== "undefined") {
   }
 }
 
+export const userExist = !!user;
+
 export const headers = {
   "Content-Type": "application/json",
   Authorization: "Bearer " + `${user?.access_token}`,

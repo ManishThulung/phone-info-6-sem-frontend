@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, Tooltip } from "antd";
-import { Table } from "antd";
 import { TableData } from "./TableData";
 import { useEffect, useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";

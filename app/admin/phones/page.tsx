@@ -15,7 +15,7 @@ function Page() {
     <AdminSection>
       <Sidebar />
       <AdminBg>
-        <div className=" ml-8">
+        <div>
           {!isForm ? (
             <>
               {/* <Link href="/admin/phones/form"> */}
