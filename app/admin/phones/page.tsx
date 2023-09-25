@@ -7,32 +7,32 @@ import { Button } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
 function Page() {
-  const [isForm, setIsForm] = useState<boolean>(false);
-  const onClick = () => {
-    setIsForm(true);
-  };
+  // const [isForm, setIsForm] = useState<boolean>(false);
+  // const onClick = () => {
+  //   setIsForm(true);
+  // };
   return (
     <AdminSection>
       <Sidebar />
       <AdminBg>
         <div>
-          {!isForm ? (
-            <>
-              {/* <Link href="/admin/phones/form"> */}
-              <Button
-                type="primary"
-                size="large"
-                className="bg-[#1677ff] float-right m-8"
-                onClick={onClick}
-              >
-                Add Phone
-              </Button>
-              {/* </Link> */}
-              <PhoneTable />
-            </>
+          {/* {!isForm ? (
+            <> */}
+          <Link href="/admin/phones/create">
+            <Button
+              type="primary"
+              size="large"
+              className="bg-[#1677ff] float-right m-8"
+              // onClick={onClick}
+            >
+              Add Phone
+            </Button>
+          </Link>
+          <PhoneTable />
+          {/* </>
           ) : (
             <PhoneForm setIsForm={setIsForm} />
-          )}
+          )} */}
         </div>
       </AdminBg>
     </AdminSection>
