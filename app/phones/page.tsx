@@ -10,12 +10,12 @@ function Phones() {
   const { isLoading, data, error } = useGetCompanyQuery();
 
   return (
-    <section className="relative z-10 overflow-hidden  pt-10">
+    <section className="relative z-10 overflow-hidden py-[96px] lg:py-[128px]">
       <div className="container ">
         {data &&
           data.map((company: Company, index: number) => {
             return (
-              <div className="py-10" key={index}>
+              <div className="py-5" key={index}>
                 <Suspense fallback={<p>loading...</p>}>
                   <Accordion
                     id={company.id}

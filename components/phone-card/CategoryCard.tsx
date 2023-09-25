@@ -18,6 +18,8 @@ function CategoryCard({ imgUrl, name, path }: PageProps) {
             className="rounded-t-xl w-full h-full"
             src={imgUrl ? imgUrl : cardPhone}
             alt="mobile"
+            width={300}
+            height={300}
             unoptimized
           />
         </div>

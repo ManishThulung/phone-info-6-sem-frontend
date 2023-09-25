@@ -8,6 +8,16 @@ import phonePic from "../../public/image/phone1.png";
 import { SpecificationWrapper } from "./Styles";
 import { Rate } from "antd";
 import { useState } from "react";
+import Processor from "@/public/assets/Processor";
+import Display from "@/public/assets/Display";
+import Security from "@/public/assets/Security";
+import Nfc from "@/public/assets/Nfc";
+import Network from "@/public/assets/Network";
+import Sensor from "@/public/assets/Sensor";
+import OS from "@/public/assets/OS";
+import Package from "@/public/assets/Package";
+import Date from "@/public/assets/Date";
+import { FcRating } from "react-icons/Fc";
 
 interface PageProps {
   data: {
@@ -17,6 +27,14 @@ interface PageProps {
     camera?: string;
     battery?: string;
     memory?: string;
+    processor?: string;
+    display?: string;
+    os?: string;
+    packageContains?: string;
+    sensors?: string;
+    network?: string;
+    securityAuthentication?: string;
+    nfc?: string;
     photo?: string;
     releaseDate?: string;
     price?: number;
@@ -33,6 +51,14 @@ function Specification({ data }: PageProps) {
     battery,
     memory,
     photo,
+    processor,
+    display,
+    os,
+    packageContains,
+    sensors,
+    network,
+    securityAuthentication,
+    nfc,
     releaseDate,
     price,
     ratings,
@@ -66,7 +92,9 @@ function Specification({ data }: PageProps) {
               unoptimized
             />
           </div>
-          <h3 className="text-center text-sm font-semibold">{name}</h3>
+          <h3 className="text-center text-4xl lg:text-5xl font-bold text-gray-900 font-sans">
+            {name}
+          </h3>
           <div className="mt-5 flex justify-evenly">
             <div className="bg-[#3797ff] rounded-md h-5 w-5"></div>
             <div className="bg-black h-5 w-5 rounded-md"></div>
@@ -96,7 +124,7 @@ function Specification({ data }: PageProps) {
               <Battery />
             </div>
             <div className="text-center py-2 text-lg font-semibold">
-              <span>Release Date</span>
+              <span>Battery</span>
             </div>
           </div>
           <div className="xl:border-b-[3px] xl:order-none  order-7 xl:border-gray-300 xl:xl:border-r-[3px] px-8 pt-2">
@@ -109,7 +137,7 @@ function Specification({ data }: PageProps) {
           </div>
           <div className="xl:border-b-[3px] xl:order-none  order-9 xl:border-gray-300 px-8 pt-2">
             <div className="flex justify-center">
-              <Price />
+              <FcRating className="h-[18px] w-[18px]" />
             </div>
             <div className="text-center py-2 text-lg font-semibold">
               <span>Rating</span>
@@ -127,11 +155,7 @@ function Specification({ data }: PageProps) {
             {camera}
           </div>
           <div className="xl:border-gray-300 xl:order-none  order-6 flex justify-center text-base font-semibold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
-            {releaseDate ? (
-              releaseDate.toString().split("T")[0]
-            ) : (
-              <span>2020-4-1</span>
-            )}
+            {battery}
           </div>
           <div className="xl:border-gray-300 xl:order-none  order-6 flex justify-center text-base font-semibold xl:xl:border-r-[3px] xl:px-10 px-10 xl:py-2 py-1">
             {price}
@@ -143,40 +167,76 @@ function Specification({ data }: PageProps) {
       </div>
 
       <SpecificationWrapper className="grid grid-cols-6 xl:my-20 my-10">
-        <div>Storage & RAM</div>
+        <div>
+          <Storage />
+          Storage & RAM
+        </div>
         <p>{memory}</p>
 
-        <div>Processor</div>
-        <p>{memory}</p>
+        <div>
+          <Processor />
+          Processor
+        </div>
+        <p>{processor}</p>
 
-        <div>Display</div>
-        <p>{memory}</p>
+        <div>
+          <Display />
+          Display
+        </div>
+        <p>{display}</p>
 
-        <div>Battery</div>
+        <div>
+          <Battery />
+          Battery
+        </div>
         <p>{battery}</p>
 
-        <div>Security & Authentication</div>
+        <div>
+          <Security />
+          Security & Authentication
+        </div>
+        <p>{securityAuthentication}</p>
+
+        <div>
+          <Camera />
+          Camera
+        </div>
         <p>{camera}</p>
 
-        <div>Camera</div>
-        <p>{camera}</p>
+        <div>
+          <Nfc />
+          NFC
+        </div>
+        <p>{nfc}</p>
 
-        <div>NFT</div>
-        <p>{camera}</p>
+        <div>
+          <Network />
+          Network
+        </div>
+        <p>{network}</p>
 
-        <div>Network</div>
-        <p>{camera}</p>
+        <div>
+          <Sensor />
+          Sensors
+        </div>
+        <p>{sensors}</p>
 
-        <div>Sensors</div>
-        <p>{camera}</p>
+        <div>
+          <OS />
+          Operating System
+        </div>
+        <p>{os}</p>
 
-        <div>Operating System</div>
-        <p>{camera}</p>
+        <div>
+          <Package />
+          Package Contains
+        </div>
+        <p>{packageContains}</p>
 
-        <div>Package Contains</div>
-        <p>{camera}</p>
-
-        <div>Launched Date</div>
+        <div>
+          <Date />
+          Launched Date
+        </div>
         <p>
           {releaseDate ? (
             releaseDate.toString().split("T")[0]
@@ -185,7 +245,10 @@ function Specification({ data }: PageProps) {
           )}
         </p>
 
-        <div>Price</div>
+        <div>
+          <Price />
+          Price
+        </div>
         <p>{price}</p>
       </SpecificationWrapper>
     </div>

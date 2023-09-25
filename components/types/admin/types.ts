@@ -14,3 +14,9 @@ export interface UserData {
   email: string;
   role: string;
 }
+
+export interface CompanyData {
+  key: React.Key;
+  id: number;
+  company: string;
+}

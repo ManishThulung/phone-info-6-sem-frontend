@@ -2,9 +2,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ThemeToggler from "./ThemeToggler";
-import { BiSearchAlt2 } from "react-icons/bi";
 import { HiOutlineUserCircle } from "react-icons/hi";
-import HeaderLogo from "@/public/assets/headerLogo";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
 
 const menuData = [
   {
@@ -33,57 +33,21 @@ const menuData = [
   },
   {
     id: 5,
-    title: "About Us",
-    path: "/about",
+    title: "Articles",
+    path: "/articles",
     newTab: false,
   },
   {
     id: 6,
-    title: "Contact Us",
-    path: "/contact",
+    title: "About Us",
+    path: "/about",
     newTab: false,
   },
 ];
 
 const Header = () => {
-  const menuData = [
-    {
-      id: 1,
-      title: "Home",
-      path: "/",
-      newTab: false,
-    },
-    {
-      id: 2,
-      title: "Phones",
-      path: "/phones",
-      newTab: false,
-    },
-    {
-      id: 3,
-      title: "Search Guide",
-      path: "/search",
-      newTab: false,
-    },
-    {
-      id: 4,
-      title: "Comparison",
-      path: "/compare",
-      newTab: false,
-    },
-    {
-      id: 5,
-      title: "About Us",
-      path: "/about",
-      newTab: false,
-    },
-    {
-      id: 6,
-      title: "Contact Us",
-      path: "/contact",
-      newTab: false,
-    },
-  ];
+  const router = useRouter();
+  const [existUser, setExistUser] = useState<boolean>(false);
 
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -100,9 +64,27 @@ const Header = () => {
       setSticky(false);
     }
   };
+
+  const handleClick = () => {
+    localStorage.removeItem("access_token");
+    setExistUser(false);
+    toast.success("Logout successful");
+    router.push("/");
+  };
+  // if (!existUser) {
+  //   window.location.reload();
+  // }
+
   useEffect(() => {
     window.addEventListener("scroll", handleStickyNavbar);
-  });
+
+    if (typeof window !== "undefined") {
+      let isUser = localStorage.getItem("access_token");
+      if (isUser) {
+        setExistUser(true);
+      }
+    }
+  }, [existUser]);
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
@@ -132,7 +114,8 @@ const Header = () => {
             <Link href="/" className={` block w-full ${sticky ? "" : ""} `}>
               {/* <HeaderLogo /> */}
               <div className="text-2xl text-black flex justify-center flex-col py-4 items-center">
-                <span>A Web Portal for</span> <span> Mobile Phones </span>
+                <span className=" font-sans">A Web Portal for</span>
+                <span className=" font-sans"> Mobile Phones </span>
               </div>
             </Link>
           </div>
@@ -174,7 +157,7 @@ const Header = () => {
                       {menuItem.path ? (
                         <Link
                           href={menuItem.path}
-                          className={`flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
+                          className={`flex py-2 font-sans text-lg text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
                         >
                           {menuItem.title}
                         </Link>
@@ -214,36 +197,48 @@ const Header = () => {
                     </li>
                   ))}
 
-                  <li className="group relative my-[2px]">
-                    <Link
-                      href="/auth"
-                      className={`flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
-                    >
-                      Log in
-                    </Link>
+                  <li className="group relative">
+                    {!existUser ? (
+                      <Link
+                        href="/auth"
+                        className={`flex py-2 text-lg font-sans group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
+                      >
+                        Log in
+                      </Link>
+                    ) : (
+                      <div
+                        className={`flex py-2 text-lg font-sans cursor-pointer group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
+                        onClick={handleClick}
+                      >
+                        Log out
+                      </div>
+                    )}
                   </li>
-                  <li className="group relative my-[2px]">
+                  {/* <li className="group relative my-[2px]">
                     <Link
                       href="/signin"
                       className={`flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
                     >
                       <BiSearchAlt2 size={20} />
                     </Link>
-                  </li>
-                  <li className="group relative my-[2px]">
-                    <Link
-                      href="/signin"
-                      className={`flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
-                    >
-                      <HiOutlineUserCircle size={20} />
-                    </Link>
-                  </li>
+                  </li> */}
+                  {existUser && (
+                    <li className="group relative flex">
+                      <Link
+                        href="/profile"
+                        className={`flex justify-center items-center py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
+                      >
+                        <HiOutlineUserCircle size={20} />
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </nav>
             </div>
           </div>
         </div>
       </header>
+      <ToastContainer />
     </>
   );
 };

@@ -40,9 +40,9 @@ function PhoneDetails({ params: { phoneId } }: PageProps) {
     <>
       {data ? (
         <>
-          <div className="xl:container px-5 xl:px-36 xl:mx-auto my-[128px]">
-            <div className="flex justify-between flex-col xl:flex-row gap-4 xl:gap-0">
-              <div className="flex gap-2 font-bold  text-[10px] xl:text-[12px]">
+          <div className="container px-5 xl:px-36 xl:mx-auto my-[128px]">
+            <div className="flex justify-end flex-col xl:flex-row gap-4 xl:gap-0">
+              {/* <div className="flex gap-2 font-bold  text-[10px] xl:text-[12px]">
                 <div className="bg-gray-200 text-black px-2 rounded-md flex py-1">
                   <span>iphone 13</span>
                 </div>
@@ -52,17 +52,17 @@ function PhoneDetails({ params: { phoneId } }: PageProps) {
                 <div className="bg-gray-200 text-black px-3 rounded-md flex py-1">
                   <span>iphone 13 pro max</span>
                 </div>
-              </div>
+              </div> */}
               <div className="flex gap-2 font-bold text-[10px] xl:text-[12px]">
                 <div
-                  className={`bg-gray-200 text-black px-3 rounded-md flex py-1 cursor-pointer hover:bg-slate-500 ${
+                  className={`bg-gray-200 text-black px-3 font-semibold font-base rounded-md flex py-1 cursor-pointer hover:bg-slate-500 ${
                     !reviewOpen && "bg-orange-400"
                   }`}
                 >
                   <span onClick={specHandler}>Specification</span>
                 </div>
                 <div
-                  className={`bg-gray-200 text-black px-3 rounded-md flex py-1 cursor-pointer hover:bg-slate-500 ${
+                  className={`bg-gray-200 text-black px-3 font-semibold font-base rounded-md flex py-1 cursor-pointer hover:bg-slate-500 ${
                     reviewOpen && "bg-orange-400"
                   }`}
                 >

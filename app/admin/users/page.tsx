@@ -9,7 +9,7 @@ function Page() {
     <AdminSection>
       <Sidebar />
       <AdminBg>
-        <div className=" ml-8">
+        <div>
           <UserTable />
         </div>
       </AdminBg>

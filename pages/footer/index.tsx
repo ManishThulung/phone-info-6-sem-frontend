@@ -14,7 +14,8 @@ const Footer = () => {
           <div className="flex justify-center">
             {/* <Logo /> */}
             <div className="text-4xl text-white flex justify-center flex-col py-4 items-center">
-              <span>A Web Portal for</span> <span> Mobile Phones </span>
+              <span className=" font-sans">A Web Portal for</span>{" "}
+              <span className=" font-sans"> Mobile Phones </span>
             </div>
           </div>
           <hr className="dark:bg-gray-700 mx-auto mb-8 h-[2px]  w-full rounded border-0 bg-[#dddfe0]" />
