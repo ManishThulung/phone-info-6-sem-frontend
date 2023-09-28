@@ -6,7 +6,7 @@ import {
   ComparePhone,
   Phone,
 } from "../types/phone";
-import { headers } from "../storage";
+import { formDataHeaders, headers } from "../storage";
 
 type Query = {
   limit: number;
@@ -25,25 +25,34 @@ export const phoneApi: any = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URI,
   }),
-  tagTypes: ["Phones"],
+  tagTypes: ["Phones", "Comment"],
 
   endpoints: (builder) => ({
     getCompany: builder.query<Company[], null>({
       query: () => "company",
+      providesTags: ["Comment"],
+    }),
+    getAllPhonesName: builder.query({
+      query: () => "phones/all",
+      providesTags: ["Phones"],
     }),
     getPhones: builder.query<Phone[], null>({
       query: () => "phones",
+      providesTags: ["Comment"],
     }),
 
     getCategoryPhones: builder.query<Phone[], string>({
       query: (category) => `/phones/category/${category}`,
+      providesTags: ["Comment"],
     }),
     getSimilarPhones: builder.query<Phone[], string>({
       query: (name) => `/phones/similar/${name}`,
+      providesTags: ["Comment"],
     }),
 
     getPhoneById: builder.query<Phone, number>({
       query: (id) => `phones/${id}`,
+      providesTags: ["Comment"],
     }),
     getPhoneSearch: builder.query<Phone, Query>({
       query: ({
@@ -74,6 +83,16 @@ export const phoneApi: any = createApi({
       invalidatesTags: ["Phones"],
     }),
 
+    addPhone: builder.mutation({
+      query: (body) => ({
+        url: `phones/create`,
+        method: "POST",
+        body,
+        credentialsls: "include",
+        headers: formDataHeaders,
+      }),
+    }),
+
     deletePhone: builder.mutation({
       query: (id) => ({
         url: `phones/${id}`,
@@ -88,6 +107,7 @@ export const phoneApi: any = createApi({
 
 export const {
   useGetPhonesQuery,
+  useGetAllPhonesNameQuery,
   useGetCompanyQuery,
   useGetCategoryPhonesQuery,
   useGetSimilarPhonesQuery,
@@ -95,5 +115,6 @@ export const {
   useGetPhoneSearchQuery,
   // useGetComparePhoneQuery,
   useComparePhoneMutation,
+  useAddPhoneMutation,
   useDeletePhoneMutation,
 } = phoneApi;

@@ -15,6 +15,7 @@ export const userApi: any = createApi({
     }),
     getUserById: builder.query<User, number>({
       query: (id) => `users/${id}`,
+      providesTags: ["Users"],
     }),
 
     registerUser: builder.mutation({

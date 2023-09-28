@@ -13,4 +13,6 @@ export type AccessToken = {
   access_token: string;
   role: string;
   id: number;
+  email?: string;
+  name?: string;
 };
