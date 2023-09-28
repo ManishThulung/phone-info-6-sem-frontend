@@ -13,10 +13,12 @@ export const commentApi: any = createApi({
   endpoints: (builder) => ({
     getComments: builder.query<any, null>({
       query: () => "comment",
+      providesTags: ["Comment"],
     }),
 
     getCommentsById: builder.query<any, number>({
       query: (id) => `comment/phone/${id}`,
+      providesTags: ["Comment"],
     }),
 
     addComment: builder.mutation<any, any>({

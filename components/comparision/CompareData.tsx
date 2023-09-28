@@ -14,218 +14,171 @@ import Sensor from "@/public/assets/Sensor";
 import Storage from "@/public/assets/storage";
 import Image from "next/image";
 import { ComparePhone } from "@/redux/types/phone";
+import { StyleTable } from "./Styled";
 
-function CompareResult({ phone1, phone2 }: ComparePhone) {
+function CompareResult({ phone1, phone2 }: any) {
   return (
-    <>
-      <div className="border-t border-gray-200 my-4">
-        <div className="flex mt-9 justify-between px-9">
+    <StyleTable>
+      <tr className="photoRow">
+        <td>
+          <Image
+            className="h-full w-full"
+            src={phone1?.photo}
+            alt="phone"
+            width={300}
+            height={300}
+            unoptimized
+          />
+        </td>
+        <td></td>
+        <td>
+          <Image
+            className="h-full w-full"
+            src={phone2?.photo}
+            alt="phone"
+            width={300}
+            height={300}
+            unoptimized
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>{phone1?.name}</th>
+        <th>Vs</th>
+        <th>{phone2?.name}</th>
+      </tr>
+      <tr>
+        <td>{phone1?.memory}</td>
+        <td className="midCol">
           <div>
-            <div className="xl:w-[200px] xl:h-[32vh] w-[90px] h-[14vh]">
-              <Image
-                className="h-full w-full"
-                src={phone1.photo ? phone1.photo : phone}
-                alt="phone"
-                width={300}
-                height={300}
-                unoptimized
-              />
-              <h4 className="xl:text-2xl text-xl font-bold text-center my-2">
-                {phone1.name}
-              </h4>
-            </div>
-            <div className="mt-12 flex justify-evenly">
-              <div className="bg-[#3797ff] rounded-sm h-4 w-4"></div>
-              <div className="bg-black h-4 w-4 rounded-sm"></div>
-              <div className="bg-[#ca0000] h-4 w-4 rounded-sm"></div>
-            </div>
+            <Storage />
+            <p>Storage & Memory</p>
           </div>
+        </td>
+        <td>{phone2?.memory}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.camera}</td>
+        <td className="midCol">
           <div>
-            <div className="xl:w-[200px] w-[90px] xl:h-[32vh] h-[14vh]">
-              <Image
-                className="h-full w-full"
-                src={phone2.photo ? phone2.photo : phone}
-                alt="phone"
-                width={300}
-                height={300}
-                unoptimized
-              />
-              <h4 className="xl:text-2xl text-xl font-bold text-center my-2">
-                {phone2.name}
-              </h4>
-            </div>
-            <div className="mt-12 flex justify-evenly">
-              <div className="bg-[#3797ff] rounded-sm h-4 w-4"></div>
-              <div className="bg-black h-4 w-4 rounded-sm"></div>
-              <div className="bg-[#ca0000] h-4 w-4 rounded-sm"></div>
-            </div>
+            <Storage />
+            <p>Camera</p>
           </div>
-        </div>
-      </div>
-      <div className="flex justify-center flex-col my-9">
-        <div className="border-t border-b flex justify-center">
-          <div className="m-auto text-lg font-medium">{phone1.memory}</div>
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Storage />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Storage & RAM
-            </span>
+        </td>
+        <td>{phone2?.camera}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.display}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Display</p>
           </div>
-          <div className="m-auto text-lg font-medium">{phone2.memory}</div>
-        </div>
+        </td>
+        <td>{phone2?.display}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.battery}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Battery</p>
+          </div>
+        </td>
+        <td>{phone2?.battery}</td>
+      </tr>
 
-        <div className="border-b flex justify-center">
-          <div className="m-auto text-lg font-medium">{phone1.company}</div>
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Display />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Display
-            </span>
+      <tr>
+        <td>{phone1?.processor}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Processor</p>
           </div>
-          <div className="m-auto text-lg font-medium">{phone2.company}</div>
-        </div>
-        <div className="border-b flex justify-center">
-          <div className="m-auto text-lg font-medium">{phone1.company}</div>
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Camera />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Camera
-            </span>
+        </td>
+        <td>{phone2?.processor}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.securityAuthentication}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Security & Authentication</p>
           </div>
-          <div className="m-auto text-lg font-medium">{phone2.company}</div>
-        </div>
-
-        <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Processor />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Processor
-            </span>
+        </td>
+        <td>{phone2?.securityAuthentication}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.nfc}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>NFC</p>
           </div>
-        </div>
-
-        <div className="border-b flex justify-center">
-          <div className="m-auto text-lg font-medium">{phone1.camera}</div>
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Camera />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Camera
-            </span>
+        </td>
+        <td>{phone2?.nfc}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.network}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Network</p>
           </div>
-          <div className="m-auto text-lg font-medium">{phone2.camera}</div>
-        </div>
-        <div className="border-b flex justify-center">
-          <div className="m-auto text-lg font-medium">{phone1.battery}</div>
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Battery />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Battery
-            </span>
+        </td>
+        <td>{phone2?.network}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.sensors}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Sensors</p>
           </div>
-          <div className="m-auto text-lg font-medium">{phone2.battery}</div>
-        </div>
-
-        <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Security />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Security & Authentication
-            </span>
+        </td>
+        <td>{phone2?.sensors}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.os}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Operating System</p>
           </div>
-        </div>
-
-        <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Nfc />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              NFC
-            </span>
+        </td>
+        <td>{phone2?.os}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.packageContains}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Package Contains</p>
           </div>
-        </div>
-
-        <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Network />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Networks
-            </span>
+        </td>
+        <td>{phone2?.packageContains}</td>
+      </tr>
+      <tr>
+        <td>{phone1?.releaseDate}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Lunch Date</p>
           </div>
-        </div>
-
-        <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Sensor />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Sensors
-            </span>
+        </td>
+        <td>{phone2?.releaseDate}</td>
+      </tr>
+      <tr>
+        <td>Rs.{phone1?.price}</td>
+        <td className="midCol">
+          <div>
+            <Storage />
+            <p>Price</p>
           </div>
-        </div>
-        <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <OS />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Operating System
-            </span>
-          </div>
-        </div>
-        <div className="border-b flex justify-center">
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Package />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Package Contains
-            </span>
-          </div>
-        </div>
-        <div className="border-b flex justify-center">
-          <div className="m-auto text-lg font-medium">{phone1.releaseDate}</div>
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <ReleaseDate />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              LunchDate
-            </span>
-          </div>
-          <div className="m-auto text-lg font-medium">{phone2.releaseDate}</div>
-        </div>
-        <div className="border-b flex justify-center">
-          <div className="m-auto text-lg font-medium">{phone1.price}</div>
-          <div className="border-r border-l w-[280px] px-9 py-4">
-            <div className="flex justify-center">
-              <Price />
-            </div>
-            <span className="text-base lg:text-lg flex justify-center pt-1 font-semibold">
-              Price
-            </span>
-          </div>
-          <div className="m-auto text-lg font-medium">{phone2.price}</div>
-        </div>
-      </div>
-    </>
+        </td>
+        <td>Rs.{phone2?.price}</td>
+      </tr>
+    </StyleTable>
   );
 }
 

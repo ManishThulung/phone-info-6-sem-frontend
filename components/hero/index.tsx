@@ -5,24 +5,20 @@ import CategoryCard from "@/components/phone-card/CategoryCard";
 import Link from "next/link";
 import { styled } from "styled-components";
 import { useGetCategoryPhonesQuery } from "@/redux/services/phoneApi";
-import { useEffect, useState } from "react";
+import User8 from "../user/User8";
+import User5 from "../user/User5";
 
 const Hero = () => {
-  // const [phone, setPhone] = useState([]);
-  // const phone: any = [];
   const { isLoading, data } = useGetCategoryPhonesQuery("trending");
 
   let user: any;
+
   if (typeof window !== "undefined") {
-    user = localStorage.getItem("access_token");
+    let isUser = localStorage.getItem("access_token");
+    if (isUser) {
+      user = JSON?.parse(isUser);
+    }
   }
-
-  // setPhone((prev)=>{...prev, data})
-
-  // useEffect(() => {
-  //   // phone.push(data[0], data[1], data[3], data[2], data[4]);
-
-  // }, [data, phone]);
 
   return (
     <>
@@ -179,76 +175,45 @@ const Hero = () => {
           <div className="flex justify-between">
             {user ? (
               <>
-                <Link href={`/phones/recommended/1`}>
-                  <BoxShadow>
-                    <Image
-                      src={"/image/iphone14.png"}
-                      alt="Phone"
-                      height={320}
-                      width={250}
-                      unoptimized
-                    />
-                    <h4 className="text-2xl font-sans font-bold text-gray-900 pt-4 pb-8 text-center">
-                      iPhone 14
-                    </h4>
-                  </BoxShadow>
-                </Link>
-                <Link href={`/phones/recommended/5`}>
-                  <BoxShadow>
-                    <Image
-                      src={"/image/iphone-14-pro.png"}
-                      alt="Phone"
-                      height={320}
-                      width={250}
-                      unoptimized
-                    />
-                    <h4 className="text-2xl font-sans font-bold text-gray-900 pt-4 pb-8 text-center">
-                      iPhone 14 Pro
-                    </h4>
-                  </BoxShadow>
-                </Link>
-                <Link href={`/phones/recommended/4`}>
-                  <BoxShadow>
-                    <Image
-                      src={"/image/iphone 14.jpg"}
-                      alt="Phone"
-                      height={320}
-                      width={250}
-                      unoptimized
-                    />
-                    <h4 className="text-2xl font-sans font-bold text-gray-900 pt-4 pb-8 text-center">
-                      iPhone 15
-                    </h4>
-                  </BoxShadow>
-                </Link>
-                <Link href={`/phones/recommended/3`}>
-                  <BoxShadow>
-                    <Image
-                      src={"/image/iphone-13-pro-max.jpg"}
-                      alt="Phone"
-                      height={320}
-                      width={250}
-                      unoptimized
-                    />
-                    <h4 className="text-2xl font-sans font-bold text-gray-900 pt-4 pb-8 text-center">
-                      iPhone 13 Pro Max
-                    </h4>
-                  </BoxShadow>
-                </Link>
-                <Link href={`/phones/recommended/6`}>
-                  <BoxShadow>
-                    <Image
-                      src={"/image/xiaomi 13.jpg"}
-                      alt="Phone"
-                      height={320}
-                      width={250}
-                      unoptimized
-                    />
-                    <h4 className="text-2xl font-sans font-bold text-gray-900 pt-4 pb-8 text-center">
-                      xiaomi 13
-                    </h4>
-                  </BoxShadow>
-                </Link>
+                {user.id == 5 && <User5 />}
+                {user.id == 8 ? (
+                  <User8 />
+                ) : (
+                  <>
+                    {data &&
+                      data.map((phone: any, i: number) => {
+                        let phones: any = [];
+                        if (i < 5) {
+                          phones.push(phone);
+                        } else {
+                          return;
+                        }
+                        return (
+                          <>
+                            {phones.map((phone: any, i: any) => (
+                              <Link
+                                href={`/phones/recommended/${phone.id}`}
+                                key={i}
+                              >
+                                <BoxShadow>
+                                  <Image
+                                    src={phone.photo}
+                                    alt="Phone"
+                                    height={320}
+                                    width={250}
+                                    unoptimized
+                                  />
+                                  <h4 className="text-xl font-sans font-bold text-gray-900 pt-4 pb-8 text-center">
+                                    {phone.name}
+                                  </h4>
+                                </BoxShadow>
+                              </Link>
+                            ))}
+                          </>
+                        );
+                      })}
+                  </>
+                )}
               </>
             ) : (
               <>
@@ -295,7 +260,7 @@ const Hero = () => {
 
 export default Hero;
 
-const BoxShadow = styled.div`
+export const BoxShadow = styled.div`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 8px;
 `;

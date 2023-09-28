@@ -15,15 +15,19 @@ function Phones() {
         {data &&
           data.map((company: Company, index: number) => {
             return (
-              <div className="py-5" key={index}>
-                <Suspense fallback={<p>loading...</p>}>
-                  <Accordion
-                    id={company.id}
-                    company={company.company}
-                    phone={company.phone}
-                  />
-                </Suspense>
-              </div>
+              <>
+                {company.phone.length >= 1 && (
+                  <div className="py-5" key={index}>
+                    <Suspense fallback={<p>loading...</p>}>
+                      <Accordion
+                        id={company.id}
+                        company={company.company}
+                        phone={company.phone}
+                      />
+                    </Suspense>
+                  </div>
+                )}
+              </>
             );
           })}
       </div>

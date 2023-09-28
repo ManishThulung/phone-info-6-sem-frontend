@@ -64,20 +64,6 @@ function LoginForm() {
     router.push("/");
   }
 
-  // useEffect(() => {
-  //   const accessToken = localStorage.getItem("access_token");
-  //   if (accessToken) {
-  //     router.push("/");
-  //   }
-  //   // if (loginData) {
-  //   //   toast.success(loginData?.message);
-  //   // }
-  //   if (error) {
-  //     // toast.error(error.status);
-  //     console.log(error);
-  //   }
-  // }, [loginData, router, error]);
-
   return (
     <>
       <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>

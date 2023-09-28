@@ -37,7 +37,7 @@ function PhoneCategory({ params: { cat } }: PageProps) {
             ))}
         </div>
       </div>
-      <Pagination />
+      {/* <Pagination /> */}
     </>
   );
 }

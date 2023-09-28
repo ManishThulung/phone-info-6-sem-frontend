@@ -1,5 +1,6 @@
 import { ControlledField, useRHForm } from "@/components/form";
 import { useGetCompaniesQuery } from "@/redux/services/companyApi";
+import { useAddPhoneMutation } from "@/redux/services/phoneApi";
 import { Button, DatePicker, Input, Select } from "antd";
 import React, { useState } from "react";
 import { z } from "zod";
@@ -11,6 +12,7 @@ function CreatePhone() {
   const [loading, setLoading] = useState(false);
 
   const { data: companyData } = useGetCompaniesQuery();
+  const [addPhone, { data }] = useAddPhoneMutation();
 
   const {
     Form,
@@ -46,6 +48,47 @@ function CreatePhone() {
 
   const handleSubmit = (data: any) => {
     console.log(data, "data");
+    //     {
+    // name,
+    // company,
+    // display,
+    // processor,
+    // camera,
+    // battery,
+    // securityAuthentication,
+    // nfc,
+    // network,
+    // sensors,
+    // os,
+    // price,
+    // memory,
+    // releaseDate,
+    // file
+    //     } = data
+    //     console.log(company, "data.name");
+
+    const formData = new FormData();
+    if (!!data.name) {
+      formData.set("ram", "nam");
+      formData.set("name", data.name);
+      formData.set("company", data.company);
+      formData.set("display", data.display);
+      formData.set("processor", data.processor);
+      formData.set("camera", data.camera);
+      formData.set("battery", data.battery);
+      formData.set("securityAuthentication", data.securityAuthentication);
+      formData.set("nfc", data.nfc);
+      formData.set("network", data.network);
+      formData.set("sensors", data.sensors);
+      formData.set("os", data.os);
+      formData.set("price", data.price);
+      formData.set("memory", data.memory);
+      formData.set("releaseDate", data.releaseDate);
+      formData.set("file", data.file);
+
+      console.log(formData, "data");
+      addPhone(formData);
+    }
   };
 
   const options =
@@ -282,11 +325,12 @@ function CreatePhone() {
           control={control}
           name="file"
           label="Photo"
-          Component={TextArea}
+          Component={Input}
           componentProps={{
             size: "large",
             placeholder: "Photo",
             rows: 4,
+            type: "file",
           }}
           errors={errors}
         />

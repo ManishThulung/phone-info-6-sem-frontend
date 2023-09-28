@@ -12,3 +12,8 @@ export const headers = {
   "Content-Type": "application/json",
   Authorization: "Bearer " + `${user?.access_token}`,
 };
+
+export const formDataHeaders = {
+  "Content-Type": "multipart/form-data",
+  Authorization: "Bearer " + `${user?.access_token}`,
+};
