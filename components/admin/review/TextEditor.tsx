@@ -2,6 +2,8 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import { useAddReviewMutation } from "@/redux/services/ReviewAi";
+import { ToastContainer, toast } from "react-toastify";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -27,8 +29,20 @@ const modules = {
   },
 };
 
-function TextEditor() {
+function TextEditor({
+  id,
+  setIsModalOpen,
+}: {
+  id: number;
+  setIsModalOpen: (value: boolean) => void;
+}) {
   const [value, setValue] = useState("");
+
+  const [addReview, { success, error, loading }] = useAddReviewMutation();
+
+  if (error) {
+    toast.success("Review added successfully");
+  }
   return (
     <>
       <ReactQuill
@@ -39,11 +53,15 @@ function TextEditor() {
       />
       <button
         onClick={() => {
-          console.log(value);
+          addReview({ id, review: value });
+          toast.success("Review added successfully");
+          setIsModalOpen(false);
         }}
+        disabled={loading}
       >
         save
       </button>
+      <ToastContainer />
     </>
   );
 }

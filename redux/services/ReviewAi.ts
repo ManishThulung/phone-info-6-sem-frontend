@@ -19,6 +19,7 @@ export const reviewApi: any = createApi({
   endpoints: (builder) => ({
     getReview: builder.query<Company[], null>({
       query: () => "review",
+      providesTags: ["Review"],
     }),
 
     addReview: builder.mutation({
@@ -26,6 +27,8 @@ export const reviewApi: any = createApi({
         url: `review/create/${id}`,
         method: "POST",
         body,
+        credentialsls: "include",
+        headers: headers,
       }),
       invalidatesTags: ["Review"],
     }),
