@@ -18,8 +18,6 @@ function Compare() {
   const { data: phonesNameData } = useGetAllPhonesNameQuery();
   const [comparePhone, { data, isLoading, error }] = useComparePhoneMutation();
 
-  const phone1 = data && data.phone1;
-  const phone2 = data && data.phone2;
   const onChangeOne = (value: string) => {
     setPhoneOne(value);
   };

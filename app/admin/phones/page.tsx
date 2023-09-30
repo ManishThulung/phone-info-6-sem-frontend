@@ -15,9 +15,7 @@ function Page() {
     <AdminSection>
       <Sidebar />
       <AdminBg>
-        <div>
-          {/* {!isForm ? (
-            <> */}
+        <>
           <Link href="/admin/phones/create">
             <Button
               type="primary"
@@ -29,11 +27,7 @@ function Page() {
             </Button>
           </Link>
           <PhoneTable />
-          {/* </>
-          ) : (
-            <PhoneForm setIsForm={setIsForm} />
-          )} */}
-        </div>
+        </>
       </AdminBg>
     </AdminSection>
   );

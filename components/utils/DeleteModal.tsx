@@ -6,19 +6,23 @@ import TextEditor from "../admin/review/TextEditor";
 
 interface PageProps {
   isModalOpen: boolean;
-  setIsModalOpen: any;
-  id?: number;
+  setIsModalOpen: (value: boolean) => void;
+  id: number;
   name?: string;
   onOk: () => void;
   onCancel: () => void;
 }
 
-function DeleteModal({ isModalOpen, onOk, onCancel, id, name }: PageProps) {
+function DeleteModal({
+  isModalOpen,
+  setIsModalOpen,
+  onOk,
+  onCancel,
+  id,
+  name,
+}: PageProps) {
   const [deletePhone, { data, error, isSuccess }] = useDeletePhoneMutation();
 
-  console.log(data, "data");
-  console.log(id, "id");
-  console.log(name, "name");
   return (
     <Modal
       title={name == "delete" ? "Delete?" : "Review"}
@@ -34,7 +38,7 @@ function DeleteModal({ isModalOpen, onOk, onCancel, id, name }: PageProps) {
       {name == "delete" ? (
         <p>Are you sure you want to delete this?</p>
       ) : (
-        <TextEditor />
+        <TextEditor id={id} setIsModalOpen={setIsModalOpen} />
       )}
     </Modal>
   );

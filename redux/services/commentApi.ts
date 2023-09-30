@@ -21,22 +21,22 @@ export const commentApi: any = createApi({
       providesTags: ["Comment"],
     }),
 
-    addComment: builder.mutation<any, any>({
-      query: ({ id, ...body }) => ({
-        url: `comment/create/${id}`,
-        method: "POST",
-        body,
-        credentialsls: "include",
-        headers: headers,
-      }),
-      invalidatesTags: ["Comment"],
-    }),
+    // addComment: builder.mutation<any, any>({
+    //   query: ({ id, ...body }) => ({
+    //     url: `comment/create/${id}`,
+    //     method: "POST",
+    //     body,
+    //     credentialsls: "include",
+    //     headers: headers,
+    //   }),
+    //   invalidatesTags: ["Comment"],
+    // }),
   }),
 });
 
 export const {
   useGetCommentsQuery,
   useGetCommentsByIdQuery,
-  useAddCommentMutation,
+  // useAddCommentMutation,
   useDeletePhoneMutation,
 } = commentApi;

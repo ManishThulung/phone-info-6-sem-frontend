@@ -169,11 +169,6 @@ export const PhoneTable = () => {
       ...getColumnSearchProps("name"),
       render: (record) => record.name,
     },
-    // {
-    //   title: "Company",
-    //   key: "company",
-    //   render: (record) => record.company,
-    // },
     {
       title: "Price",
       key: "price",
