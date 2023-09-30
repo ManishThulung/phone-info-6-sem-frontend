@@ -4,9 +4,9 @@ import Button from "../Button";
 import { styled } from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import { Modal, Rate } from "antd";
-import { useAddCommentMutation } from "@/redux/services/commentApi";
-import { useAddRatingMutation } from "@/redux/services/ratingApi";
 import { FaUserCircle } from "react-icons/Fa";
+import { useAddCommentMutation } from "@/redux/services/phoneApi";
+import { useAddRatingMutation } from "@/redux/services/ratingApi";
 
 function Comment({ id, data }: { id: number; data: any }) {
   const [open, setOpen] = useState(false);

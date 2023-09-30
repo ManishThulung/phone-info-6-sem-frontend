@@ -24,7 +24,7 @@ function Review({ name, review }: PageProps) {
 
 export default Review;
 
-const StyledDiv = styled.div`
+export const StyledDiv = styled.div`
   h1 {
     font-weight: 600;
     font-size: 30px;

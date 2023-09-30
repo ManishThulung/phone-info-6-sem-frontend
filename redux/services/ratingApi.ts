@@ -10,6 +10,11 @@ export const ratingApi: any = createApi({
   tagTypes: ["Rating"],
 
   endpoints: (builder) => ({
+    getRatingById: builder.query({
+      query: (id) => `rating/${id}`,
+      providesTags: ["Rating"],
+    }),
+
     addRating: builder.mutation({
       query: ({ id, ...body }) => ({
         url: `rating/create/${id}`,
@@ -23,4 +28,4 @@ export const ratingApi: any = createApi({
   }),
 });
 
-export const { useAddRatingMutation } = ratingApi;
+export const { useGetRatingByIdQuery, useAddRatingMutation } = ratingApi;

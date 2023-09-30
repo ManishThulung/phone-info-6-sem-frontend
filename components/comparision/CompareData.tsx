@@ -1,4 +1,3 @@
-import phone from "../../public/image/phone1.png";
 import Battery from "@/public/assets/Battery";
 import Camera from "@/public/assets/Camera";
 import Display from "@/public/assets/Display";
@@ -13,7 +12,6 @@ import Security from "@/public/assets/Security";
 import Sensor from "@/public/assets/Sensor";
 import Storage from "@/public/assets/storage";
 import Image from "next/image";
-import { ComparePhone } from "@/redux/types/phone";
 import { StyleTable } from "./Styled";
 
 function CompareResult({ phone1, phone2 }: any) {
@@ -61,7 +59,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.camera}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Camera />
             <p>Camera</p>
           </div>
         </td>
@@ -71,7 +69,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.display}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Display />
             <p>Display</p>
           </div>
         </td>
@@ -81,7 +79,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.battery}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Battery />
             <p>Battery</p>
           </div>
         </td>
@@ -92,7 +90,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.processor}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Processor />
             <p>Processor</p>
           </div>
         </td>
@@ -102,7 +100,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.securityAuthentication}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Security />
             <p>Security & Authentication</p>
           </div>
         </td>
@@ -112,7 +110,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.nfc}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Nfc />
             <p>NFC</p>
           </div>
         </td>
@@ -122,7 +120,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.network}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Network />
             <p>Network</p>
           </div>
         </td>
@@ -132,7 +130,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.sensors}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Sensor />
             <p>Sensors</p>
           </div>
         </td>
@@ -142,7 +140,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.os}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <OS />
             <p>Operating System</p>
           </div>
         </td>
@@ -152,7 +150,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.packageContains}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Package />
             <p>Package Contains</p>
           </div>
         </td>
@@ -162,7 +160,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>{phone1?.releaseDate}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <ReleaseDate />
             <p>Lunch Date</p>
           </div>
         </td>
@@ -172,7 +170,7 @@ function CompareResult({ phone1, phone2 }: any) {
         <td>Rs.{phone1?.price}</td>
         <td className="midCol">
           <div>
-            <Storage />
+            <Price />
             <p>Price</p>
           </div>
         </td>

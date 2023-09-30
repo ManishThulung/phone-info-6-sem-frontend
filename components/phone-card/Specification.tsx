@@ -7,7 +7,7 @@ import Storage from "@/public/assets/storage";
 import phonePic from "../../public/image/phone1.png";
 import { SpecificationWrapper } from "./Styles";
 import { Rate } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Processor from "@/public/assets/Processor";
 import Display from "@/public/assets/Display";
 import Security from "@/public/assets/Security";
@@ -18,6 +18,7 @@ import OS from "@/public/assets/OS";
 import Package from "@/public/assets/Package";
 import Date from "@/public/assets/Date";
 import { FcRating } from "react-icons/Fc";
+import { useGetRatingByIdQuery } from "@/redux/services/ratingApi";
 
 interface PageProps {
   data: {
@@ -38,7 +39,6 @@ interface PageProps {
     photo?: string;
     releaseDate?: string;
     price?: number;
-    ratings?: any;
   };
 }
 
@@ -46,7 +46,6 @@ function Specification({ data }: PageProps) {
   const {
     id,
     name,
-    company,
     camera,
     battery,
     memory,
@@ -61,22 +60,21 @@ function Specification({ data }: PageProps) {
     nfc,
     releaseDate,
     price,
-    ratings,
   } = data;
 
-  const totalRatings = ratings.length;
-  const sumOfRatings = ratings.reduce(
-    (accumulator: number, rating: any) => accumulator + rating.value,
-    0
-  );
+  const { data: rating } = useGetRatingByIdQuery(id);
 
-  const rating = sumOfRatings / totalRatings;
-  const [value, setValue] = useState(rating);
+  const [value, setValue] = useState();
 
   let user: any;
   if (typeof window !== "undefined") {
     user = localStorage.getItem("access_token");
   }
+  useEffect(() => {
+    if (rating) {
+      setValue(rating.rating);
+    }
+  }, [rating]);
 
   return (
     <div>
@@ -161,7 +159,7 @@ function Specification({ data }: PageProps) {
             {price}
           </div>
           <div className="xl:border-gray-300 xl:order-none  order-8 flex justify-center text-base font-semibold  xl:px-10 px-10 xl:py-2 py-1">
-            <Rate allowHalf onChange={setValue} value={value} disabled />
+            <Rate allowHalf value={value} disabled />
           </div>
         </div>
       </div>

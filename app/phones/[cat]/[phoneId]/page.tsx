@@ -7,8 +7,6 @@ import Loader from "@/components/Loader";
 import { useState } from "react";
 import Review from "@/components/phone-card/Review";
 import Specification from "@/components/phone-card/Specification";
-import Button from "@/components/Button";
-import { styled } from "styled-components";
 import Comment from "@/components/comment/Comment";
 
 interface PageProps {

@@ -25,12 +25,12 @@ export const phoneApi: any = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URI,
   }),
-  tagTypes: ["Phones", "Comment"],
+  tagTypes: ["Phones", "Comment", "Rating"],
 
   endpoints: (builder) => ({
     getCompany: builder.query<Company[], null>({
       query: () => "company",
-      providesTags: ["Comment"],
+      providesTags: ["Comment", "Phones"],
     }),
     getAllPhonesName: builder.query({
       query: () => "phones/all",
@@ -38,21 +38,21 @@ export const phoneApi: any = createApi({
     }),
     getPhones: builder.query<Phone[], null>({
       query: () => "phones",
-      providesTags: ["Comment"],
+      providesTags: ["Phones"],
     }),
 
     getCategoryPhones: builder.query<Phone[], string>({
       query: (category) => `/phones/category/${category}`,
-      providesTags: ["Comment"],
+      providesTags: ["Phones"],
     }),
     getSimilarPhones: builder.query<Phone[], string>({
       query: (name) => `/phones/similar/${name}`,
-      providesTags: ["Comment"],
+      providesTags: ["Phones"],
     }),
 
     getPhoneById: builder.query<Phone, number>({
       query: (id) => `phones/${id}`,
-      providesTags: ["Comment"],
+      providesTags: ["Comment", "Phones", "Rating"],
     }),
     getPhoneSearch: builder.query<Phone, Query>({
       query: ({
@@ -91,6 +91,7 @@ export const phoneApi: any = createApi({
         credentialsls: "include",
         headers: formDataHeaders,
       }),
+      invalidatesTags: ["Phones"],
     }),
 
     deletePhone: builder.mutation({
@@ -101,6 +102,17 @@ export const phoneApi: any = createApi({
         headers: headers,
       }),
       invalidatesTags: ["Phones"],
+    }),
+
+    addComment: builder.mutation<any, any>({
+      query: ({ id, ...body }) => ({
+        url: `comment/create/${id}`,
+        method: "POST",
+        body,
+        credentialsls: "include",
+        headers: headers,
+      }),
+      invalidatesTags: ["Comment"],
     }),
   }),
 });
@@ -117,4 +129,5 @@ export const {
   useComparePhoneMutation,
   useAddPhoneMutation,
   useDeletePhoneMutation,
+  useAddCommentMutation,
 } = phoneApi;
